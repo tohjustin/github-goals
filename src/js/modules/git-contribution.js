@@ -1,4 +1,4 @@
-import https from 'https';
+import axios from 'axios';
 import cheerio from 'cheerio';
 import moment from 'moment';
 
@@ -6,35 +6,33 @@ const contributions = {};
 
 const getDays = username =>
   new Promise((resolve, reject) => {
-    const url = `https://github.com/users/${username}/contributions`;
-    let body;
+    const config = {
+      baseURL: 'https://github.com/users/',
+      validateStatus: status => (status === 200)
+    };
 
-    https.get(url, (res) => {
-      res.setEncoding('utf8');
-      res.on('data', (data) => {
-        body += data;
-      });
+    axios.get(`${username}/contributions`, config)
+      .then((response) => {
+        /* Grab HTML content */
+        const htmlContent = cheerio.load(response.data, {
+          ignoreWhitespace: true,
+          decodeEntities: true
+        });
 
-      if (res.statusCode !== 200) {
-        reject(res.statusCode);
-      }
-
-      res.on('end', () => {
-        const $ = cheerio.load(body, { ignoreWhitespace: true, decodeEntities: true });
-        const days = $('rect[class=day]').map((index, e) => {
+        /* Parse content */
+        const commmitCounts = htmlContent('rect[class=day]').map((index, e) => {
           const { attribs: { 'data-count': count, 'data-date': date } } = e;
           return { count, date };
         });
-        resolve(days);
-      });
-    }).on('error', (err) => {
-      reject(err);
-    });
+
+        resolve(commmitCounts);
+      })
+      .catch(error => reject(error));
   });
 
 contributions.daily = username =>
-  new Promise((resolve) => {
-    getDays(username).then((days) => {
+  getDays(username)
+    .then((days) => {
       const todayDateStr = moment().format('YYYY-MM-DD');
       const index = days.length - 1;
       let commitCount = parseInt(days[index].count, 10);
@@ -44,8 +42,8 @@ contributions.daily = username =>
       commitCount = (days[index].date === todayDateStr) ? commitCount :
         commitCount + parseInt(days[index - 1].count, 10);
 
-      resolve(commitCount);
-    });
-  });
+      return commitCount;
+    })
+    .catch(() => -1);
 
 export default contributions;

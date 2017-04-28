@@ -19,6 +19,7 @@
     "test:ci": "mocha-webpack --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\""
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "cheerio": "^0.22.0",
     "lodash": "^4.17.4",
     "moment": "^2.18.1"
