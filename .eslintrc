@@ -23,5 +23,8 @@
     "import/resolver": {
       "babel-module": {}
     }
-  }
+  },
+  "plugins": [
+    "html"
+  ]
 }
