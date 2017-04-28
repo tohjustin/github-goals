@@ -1,7 +1,7 @@
 import contributions from './modules/git-contribution';
 
-// Scraps & update commit count every 'INTERVAL' amount of seconds
-const INTERVAL = 30;
+// Scraps & update commit count every 2 minutes
+const INTERVAL = 2 * 60;
 
 const setBadgeText = (text) => {
   chrome.browserAction.setBadgeText({ text });
@@ -14,8 +14,8 @@ const setBadgeBackgroundColor = (color) => {
 const retrieveDailyCommitCount = (username) => {
   contributions.daily(username)
     .then((commitCount) => {
-      console.log(commitCount); // eslint-disable-line no-console
       setBadgeText(commitCount.toString());
+      console.log(commitCount); // eslint-disable-line no-console
     })
     .catch((err) => {
       setBadgeText('X');
@@ -23,6 +23,7 @@ const retrieveDailyCommitCount = (username) => {
     });
 };
 
+/* Configure extension to scrap & update commit count periodically */
 setInterval(() => {
   retrieveDailyCommitCount('tohjustin');
 }, INTERVAL * 1000);

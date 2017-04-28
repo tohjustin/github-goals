@@ -13,10 +13,10 @@ var getDays = function(username) {
 	return new Promise(function(resolve, reject) {
 		var url;
 		if (username) {
-			url = 'https://github.com/users/' + username + '/contributions';
+			url = `https://github.com/users/${username}/contributions`;
 		}
 		else {
-			return -1;
+			reject('No username provided');
 		}
 		https.get(url, function(res) {
 			res.setEncoding('utf8');
@@ -40,55 +40,21 @@ var getDays = function(username) {
 	})
 }
 
-contributions.yearly = function(username) {
-	return new Promise(function(resolve, reject) {
-		var yearCount = 0;
-		getDays(username).then(function(days) {
-			for (var i = 0; i < days.length; i++) {
-				yearCount += parseInt($(days[i]).attr('data-count'));
-			}
-			resolve(yearCount);
-		})
-		.catch((err) => {
-			error(err);
-		})
-	})
-}
-
-contributions.weekly = function(username) {
-	return new Promise(function(resolve, reject) {
-		var weekCount = 0;
-		getDays(username).then((days) => {
-			for (var i = days.length -1; i > days.length - 7; i--) {
-				weekCount += parseInt($(days[i]).attr('data-count'))
-			}
-			resolve(weekCount);
-		})
-		.catch((err) => {
-			error(err);
-		})
-	})
-}
-
 contributions.daily = function(username) {
 	return new Promise((resolve, reject) => {
 		getDays(username).then((days) => {
-			// var dayCount = parseInt($(days[days.length-1]).attr('data-count'));
 			const todayDateStr = moment().format('YYYY-MM-DD');
-			let commitCount = parseInt($(days[days.length-1]).attr('data-count'));
-			commitCount = (days[days.length-1].attribs['data-count'] === todayDateStr) ? commitCount :
-				commitCount + parseInt($(days[days.length-2]).attr('data-count'));
-			resolve(commitCount);
-		})
-		.catch((err) => {
-			error(err);
-		})
-	})
-}
+			const index = days.length-1;
+			let commitCount = parseInt($(days[index]).attr('data-count'));
 
-var error = function(err) {
-	console.log('ERROR: ', err);
-	console.log('Error getting your github info. Please make sure you have the correct username in ~/.gitconfig.');
+			// If latest entry in Github's commit graph isn't the current browser's date,
+			// we also include the commits from previous day.
+			commitCount = (days[index].attribs['data-date'] === todayDateStr) ? commitCount :
+				commitCount + parseInt($(days[index-1]).attr('data-count'));
+
+			resolve(commitCount);
+		});
+	})
 }
 
 export default contributions;
