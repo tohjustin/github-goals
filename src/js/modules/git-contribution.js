@@ -1,6 +1,7 @@
 /* eslint-disable */
 import https from 'https';
 import cheerio from 'cheerio';
+import moment from 'moment';
 
 var body;
 var $;
@@ -71,10 +72,13 @@ contributions.weekly = function(username) {
 
 contributions.daily = function(username) {
 	return new Promise((resolve, reject) => {
-		var dayCount = 0;
 		getDays(username).then((days) => {
-			dayCount = parseInt($(days[days.length-1]).attr('data-count'));
-			resolve(dayCount);
+			// var dayCount = parseInt($(days[days.length-1]).attr('data-count'));
+			const todayDateStr = moment().format('YYYY-MM-DD');
+			let commitCount = parseInt($(days[days.length-1]).attr('data-count'));
+			commitCount = (days[days.length-1].attribs['data-count'] === todayDateStr) ? commitCount :
+				commitCount + parseInt($(days[days.length-2]).attr('data-count'));
+			resolve(commitCount);
 		})
 		.catch((err) => {
 			error(err);

@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "cheerio": "^0.22.0",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1"
   },
   "devDependencies": {
     "babel-core": "6.18.2",
