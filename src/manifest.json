@@ -9,6 +9,9 @@
   "background": {
     "scripts": ["js/background.js"]
   },
+  "permissions": [
+    "*://*.github.com/users/*"
+  ],
   "name": "<%= package.name %>",
   "version": "<%= package.version %>",
   "description": "<%= package.description %>"
