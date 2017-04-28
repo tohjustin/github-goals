@@ -1,0 +1,27 @@
+{
+  "env": {
+    "browser": true,
+    "mocha": true
+  },
+  "globals": {
+    "chrome": true
+  },
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "rules": {
+    "comma-dangle": 0,
+    "import/prefer-default-export": 0,
+    "import/no-named-default": 0,
+    "react/jsx-tag-spacing": 0,
+    "react/no-array-index-key": 0,
+    "react/require-default-props": 0,
+    "no-underscore-dangle": 0,
+    "yoda": 0,
+    "prefer-rest-params": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png"
+  },
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "name": "<%= package.name %>",
+  "version": "<%= package.version %>",
+  "description": "<%= package.description %>"
+}
