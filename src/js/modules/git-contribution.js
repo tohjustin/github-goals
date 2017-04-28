@@ -2,9 +2,7 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 import moment from 'moment';
 
-const contributions = {};
-
-const getDays = username =>
+const getAllContributions = username =>
   new Promise((resolve, reject) => {
     const config = {
       baseURL: 'https://github.com/users/',
@@ -30,8 +28,8 @@ const getDays = username =>
       .catch(error => reject(error));
   });
 
-contributions.daily = username =>
-  getDays(username)
+export const getContributionsOfTheDay = username =>
+  getAllContributions(username)
     .then((days) => {
       const todayDateStr = moment().format('YYYY-MM-DD');
       const index = days.length - 1;
@@ -45,5 +43,3 @@ contributions.daily = username =>
       return commitCount;
     })
     .catch(() => -1);
-
-export default contributions;

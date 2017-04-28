@@ -1,32 +1,30 @@
-import contributions from './modules/git-contribution';
+import * as contributions from './modules/git-contribution';
 
-// Scraps & update commit count every 2 minutes
-const INTERVAL = 2 * 60;
+/* Scraps & update commit count every 2 minutes */
+const UPDATE_INTERVAL = 2 * 60 * 1000;
+const GITHUB_USERNAME = 'tohjustin';
+const COLOR_RED = '#F14436';
+const COLOR_GREY = '#666666';
 
-const setBadgeText = (text) => {
-  chrome.browserAction.setBadgeText({ text });
-};
-
-const setBadgeBackgroundColor = (color) => {
-  chrome.browserAction.setBadgeBackgroundColor({ color });
-};
-
-const retrieveDailyCommitCount = (username) => {
-  contributions.daily(username)
+const updateBadge = (username) => {
+  contributions.getContributionsOfTheDay(username)
     .then((commitCount) => {
-      setBadgeBackgroundColor((commitCount !== 0) ? '#F14436' : '#666666');
-      setBadgeText(commitCount.toString());
-      console.log(commitCount); // eslint-disable-line no-console
+      chrome.browserAction.setBadgeBackgroundColor({
+        color: (commitCount !== 0) ? COLOR_RED : COLOR_GREY
+      });
+      chrome.browserAction.setBadgeText({
+        text: commitCount.toString()
+      });
     })
-    .catch((err) => {
-      setBadgeText('X');
-      console.log('ERROR', err); // eslint-disable-line no-console
+    .catch(() => {
+      chrome.browserAction.setBadgeBackgroundColor({ color: COLOR_RED });
+      chrome.browserAction.setBadgeText({ text: 'X' });
     });
 };
 
 /* Configure extension to scrap & update commit count periodically */
 setInterval(() => {
-  retrieveDailyCommitCount('tohjustin');
-}, INTERVAL * 1000);
+  updateBadge(GITHUB_USERNAME);
+}, UPDATE_INTERVAL);
 
-retrieveDailyCommitCount('tohjustin');
+updateBadge(GITHUB_USERNAME);
