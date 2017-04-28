@@ -14,6 +14,7 @@ const setBadgeBackgroundColor = (color) => {
 const retrieveDailyCommitCount = (username) => {
   contributions.daily(username)
     .then((commitCount) => {
+      setBadgeBackgroundColor((commitCount !== 0) ? '#F14436' : '#666666');
       setBadgeText(commitCount.toString());
       console.log(commitCount); // eslint-disable-line no-console
     })
@@ -28,5 +29,4 @@ setInterval(() => {
   retrieveDailyCommitCount('tohjustin');
 }, INTERVAL * 1000);
 
-setBadgeBackgroundColor('#F34336');
 retrieveDailyCommitCount('tohjustin');
