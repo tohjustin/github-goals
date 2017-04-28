@@ -12,8 +12,9 @@
     "url": "git+https://github.com/tohjustin/github-goals.git"
   },
   "scripts": {
-    "build": "mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.prod.js",
-    "start": "mkdir -p ./build/dev && webpack --config ./webpack/webpack.config.dev.js",
+    "build": "npm run clean && mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.prod.js",
+    "start": "npm run clean && mkdir -p ./build/dev && webpack --config ./webpack/webpack.config.dev.js",
+    "clean": "rm -rf ./build",
     "lint": "eslint src/js/",
     "test": "mocha-webpack --watch --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\"",
     "test:ci": "mocha-webpack --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\""
