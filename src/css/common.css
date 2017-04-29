@@ -1,11 +1,11 @@
 .body {
-  font-family: 'Comfortaa', cursive;
+  font-family: 'Quicksand', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: normal;
   color: #333333;
   width: 300px;
-  margin: 30px;
+  margin: 20px;
 }
 
 .userInfo {
@@ -13,30 +13,37 @@
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 15px;
+  height: 50px;
 }
-
 .userInfo img {
-  width: 20%;
-  border-radius: 8px;
+  height: 100%;
+  border-radius: 5px;
 }
 .userInfo .description {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   margin-left: 15px;
 }
-.userInfo .description a {
-  /*color: #8F2CFA;*/
+.userInfo .description a,
+.userInfo .description a:link,
+.userInfo .description a:visited,
+.userInfo .description a:focus {
   color: #0366d6;
   text-decoration: none;
+  outline: none;
+  font-size: 20px;
 }
-.userInfo .description a:hover {
+.userInfo .description a:hover,
+.userInfo .description a:active {
   text-decoration: underline;
 }
 .userInfo .description div {
   margin-top: 3px;
 }
 
+.stats{
+  font-size: 14px;
+}
 .section {
   margin: 15px 0;
 }
@@ -49,17 +56,18 @@
 .section > span {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-end;
   margin-bottom: 5px;
   margin-left: 5px;
   margin-right: 5px;
 }
 .section .title {
-  font-size: 14px;
   font-weight: bold;
+  width: 50%;
 }
 .section .value {
-  font-size: 14px;
+  text-align: right;
+  width: 47.5%;
 }
 
 .progressBar {
