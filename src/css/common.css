@@ -4,8 +4,7 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: normal;
   color: #333333;
-  /*height: 500px;*/
-  width: 300px;
+  width: 200px;
   margin: 30px;
 }
 
@@ -40,17 +39,22 @@
 }
 
 .progressBar {
-	height: 7.5px;
-	-moz-border-radius: 7.5px;
-	-webkit-border-radius: 7.5px;
-	border-radius: 7.5px;
-	position: relative;
-	background: #D8D8D8;
+  height: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
+  position: relative;
+  background: #D8D8D8;
 }
 .progressBar > span {
   display: block;
   position: relative;
   overflow: hidden;
   height: 100%;
-  border-radius: 7.5px;
+  border-radius: 8px;
+  -webkit-transition: width 1s ease-out;
+  -moz-transition: width 1s ease-out;
+  -o-transition: width 1s ease-out;
+  transition: width 1s ease-out;
 }
