@@ -4,15 +4,37 @@
   -moz-osx-font-smoothing: grayscale;
   font-weight: normal;
   color: #333333;
-  width: 200px;
+  width: 300px;
   margin: 30px;
 }
 
-.header {
+.userInfo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.userInfo img {
+  width: 20%;
+  border-radius: 8px;
+}
+.userInfo .description {
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 20px;
   font-weight: bold;
-  text-align: center;
-  margin-bottom: 20px;
+  margin-left: 15px;
+}
+.userInfo .description a {
+  /*color: #8F2CFA;*/
+  color: #0366d6;
+  text-decoration: none;
+}
+.userInfo .description a:hover {
+  text-decoration: underline;
+}
+.userInfo .description div {
+  margin-top: 3px;
 }
 
 .section {
@@ -24,14 +46,16 @@
 .section:last-child {
   margin-bottom: 0;
 }
-.section span {
+.section > span {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 .section .title {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
 }
 .section .value {
