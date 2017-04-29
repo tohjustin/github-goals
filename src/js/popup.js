@@ -2,13 +2,6 @@ import moment from 'moment';
 import _msg from './modules/msg';
 import * as contributions from './modules/git-contribution';
 
-const msg = _msg.init('popup');
-const GOAL_AMOUNT = 10;
-
-msg.bg('getUser', (username) => {
-  console.log(username);
-});
-
 const computeStyle = (count, totalCount) => {
   const text = `${count}/${totalCount}`;
   const result = Math.round((count / totalCount) * 100);
@@ -24,24 +17,39 @@ const computeStyle = (count, totalCount) => {
   } else {
     color = '#F40F2B';
   }
+
   return { color, text, width };
 };
 
-contributions.getContributionsSummary('tohjustin')
-  .then((commits) => {
-    let computedStyle;
-    computedStyle = computeStyle(commits.dayCount, GOAL_AMOUNT);
-    document.getElementById('day-value').textContent = computedStyle.text;
-    document.getElementById('day-progessBar').style.width = computedStyle.width;
-    document.getElementById('day-progessBar').style.backgroundColor = computedStyle.color;
+const updateContributions = ({ githubUsername, targetContributionCount }) => {
+  contributions.getContributionsSummary(githubUsername)
+    .then((commits) => {
+      let computedStyle;
+      computedStyle = computeStyle(commits.dayCount, targetContributionCount);
+      document.getElementById('day-value').textContent = computedStyle.text;
+      document.getElementById('day-progessBar').style.width = computedStyle.width;
+      document.getElementById('day-progessBar').style.backgroundColor = computedStyle.color;
 
-    computedStyle = computeStyle(commits.weekCount, GOAL_AMOUNT * 7);
-    document.getElementById('week-value').textContent = computedStyle.text;
-    document.getElementById('week-progessBar').style.width = computedStyle.width;
-    document.getElementById('week-progessBar').style.backgroundColor = computedStyle.color;
+      computedStyle = computeStyle(commits.weekCount, targetContributionCount * 7);
+      document.getElementById('week-value').textContent = computedStyle.text;
+      document.getElementById('week-progessBar').style.width = computedStyle.width;
+      document.getElementById('week-progessBar').style.backgroundColor = computedStyle.color;
 
-    computedStyle = computeStyle(commits.monthCount, GOAL_AMOUNT * moment().daysInMonth());
-    document.getElementById('month-value').textContent = computedStyle.text;
-    document.getElementById('month-progessBar').style.width = computedStyle.width;
-    document.getElementById('month-progessBar').style.backgroundColor = computedStyle.color;
-  });
+      computedStyle = computeStyle(commits.monthCount,
+        targetContributionCount * moment().daysInMonth());
+      document.getElementById('month-value').textContent = computedStyle.text;
+      document.getElementById('month-progessBar').style.width = computedStyle.width;
+      document.getElementById('month-progessBar').style.backgroundColor = computedStyle.color;
+    });
+};
+
+const updateAvatar = (githubUsername) => {
+  document.getElementById('user-link').href = `https://www.github.com/${githubUsername}`;
+  document.getElementById('user-avatar').src = `https://avatars0.githubusercontent.com/${githubUsername}`;
+};
+
+const msg = _msg.init('popup');
+msg.bg('getUserData', ({ githubUsername, targetContributionCount }) => {
+  updateContributions({ githubUsername, targetContributionCount });
+  updateAvatar(githubUsername);
+});
