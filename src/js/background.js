@@ -20,7 +20,7 @@ const updateBadge = (username) => {
   contributions.getContributionsOfTheDay(username)
     .then((commitCount) => {
       chrome.browserAction.setBadgeBackgroundColor({
-        color: theme.getColor(Math.round(commitCount / TARGET_CONTRIBUTION_COUNT) * 100)
+        color: theme.getColor(Math.round((commitCount / TARGET_CONTRIBUTION_COUNT) * 100))
       });
       chrome.browserAction.setBadgeText({
         text: commitCount.toString()
