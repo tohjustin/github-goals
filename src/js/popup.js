@@ -35,6 +35,7 @@ const updateContributions = ({ githubUsername, targetContributionCount }) => {
 
 const updateAvatar = (githubUsername) => {
   document.getElementById('user-link').href = `https://www.github.com/${githubUsername}`;
+  document.getElementById('user-link').textContent = `${githubUsername}'s`;
   document.getElementById('user-avatar').src = `https://avatars0.githubusercontent.com/${githubUsername}`;
 };
 
