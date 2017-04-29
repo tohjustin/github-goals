@@ -1,10 +1,15 @@
 import * as contributions from './modules/git-contribution';
+import _msg from './modules/msg';
 
 /* Scraps & update commit count every 2 minutes */
 const UPDATE_INTERVAL = 2 * 60 * 1000;
 const GITHUB_USERNAME = 'tohjustin';
 const COLOR_RED = '#F14436';
 const COLOR_GREY = '#666666';
+
+_msg.init('bg', {
+  getUser: (done) => { done(GITHUB_USERNAME); }
+});
 
 const updateBadge = (username) => {
   contributions.getContributionsOfTheDay(username)
