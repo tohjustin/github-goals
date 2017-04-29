@@ -1,23 +1,13 @@
 import moment from 'moment';
 import _msg from './modules/msg';
+import * as theme from './modules/theme';
 import * as contributions from './modules/git-contribution';
 
 const computeStyle = (count, totalCount) => {
-  const text = `${count}/${totalCount}`;
-  const result = Math.round((count / totalCount) * 100);
-  const width = `${(result > 100) ? 100 : result}%`;
-
-  let color;
-  if (result >= 125) {
-    color = '#8F2CFA';
-  } else if (result >= 66) {
-    color = '#7ED321';
-  } else if (result >= 33) {
-    color = '#F5A623';
-  } else {
-    color = '#F40F2B';
-  }
-
+  const text = `${count}/${totalCount} commits`;
+  const percentage = Math.round((count / totalCount) * 100);
+  const width = `${(percentage > 100) ? 100 : percentage}%`;
+  const color = theme.getColor(percentage);
   return { color, text, width };
 };
 
