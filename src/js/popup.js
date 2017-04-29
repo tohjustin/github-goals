@@ -27,6 +27,7 @@ const updateContributions = ({ githubUsername, targetContributionCount }) => {
 
       computedStyle = computeStyle(commits.monthCount,
         targetContributionCount * moment().daysInMonth());
+      document.getElementById('month-name').textContent = `Month of ${moment().format('MMMM')}`;
       document.getElementById('month-value').textContent = computedStyle.text;
       document.getElementById('month-progessBar').style.width = computedStyle.width;
       document.getElementById('month-progessBar').style.backgroundColor = computedStyle.color;
