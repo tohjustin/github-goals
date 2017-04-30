@@ -3,6 +3,8 @@ import _msg from './modules/msg';
 import * as theme from './modules/theme';
 import * as contributions from './modules/git-contribution';
 
+const msg = _msg.init('popup');
+
 const computeStyle = (count, totalCount) => {
   const text = `${count}/${totalCount} commits`;
   const percentage = Math.round((count / totalCount) * 100);
@@ -14,11 +16,13 @@ const computeStyle = (count, totalCount) => {
 const updateContributions = ({ githubUsername, targetContributionCount }) => {
   contributions.getContributionsSummary(githubUsername)
     .then((commits) => {
-      let computedStyle;
-      computedStyle = computeStyle(commits.dayCount, targetContributionCount);
+      let computedStyle = computeStyle(commits.dayCount, targetContributionCount);
       document.getElementById('day-value').textContent = computedStyle.text;
       document.getElementById('day-progessBar').style.width = computedStyle.width;
       document.getElementById('day-progessBar').style.backgroundColor = computedStyle.color;
+
+      const { text, color } = computedStyle;
+      msg.bg('updateBadgeText', undefined, { text, color });
 
       computedStyle = computeStyle(commits.weekCount, targetContributionCount * 7);
       document.getElementById('week-value').textContent = computedStyle.text;
@@ -40,7 +44,6 @@ const updateAvatar = (githubUsername) => {
   document.getElementById('user-avatar').src = `https://avatars0.githubusercontent.com/${githubUsername}`;
 };
 
-const msg = _msg.init('popup');
 msg.bg('getUserData', ({ githubUsername, targetContributionCount }) => {
   updateContributions({ githubUsername, targetContributionCount });
   updateAvatar(githubUsername);
