@@ -52,20 +52,35 @@ const updateAvatar = (githubId) => {
   document.getElementById('user-avatar').src = `https://avatars0.githubusercontent.com/${githubId}`;
 };
 
-/* request user's github data from the background page */
-msg.bg('getUserData', ({ githubId, targetContributionCount }) => {
-  updateContributions({ githubId, targetContributionCount });
-  updateAvatar(githubId);
-});
+/* --------------------------------------
+ VIEW FUNCTIONS
+-------------------------------------- */
+const SHOW_MAIN_VIEW = () => {
+  document.getElementById('mainView').style.display = 'block';
+  document.getElementById('formView').style.display = 'none';
+};
+const SHOW_FORM_VIEW = () => {
+  document.getElementById('mainView').style.display = 'none';
+  document.getElementById('formView').style.display = 'block';
+};
+const UPDATE_MAIN_VIEW = () => {
+  /* request user's github data from the background page */
+  msg.bg('getUserData', ({ githubId, targetContributionCount }) => {
+    updateContributions({ githubId, targetContributionCount });
+    updateAvatar(githubId);
+  });
+};
 
 /* --------------------------------------
  START OF APPLICATION
 -------------------------------------- */
-
+SHOW_FORM_VIEW();
 document.getElementById('formView-submit').addEventListener('click', () => {
   const githubId = document.getElementById('formView-id').value;
   const targetContributionCount = parseInt(document.getElementById('formView-count').value, 10);
 
   /* request background to set user data */
   msg.bg('setUserData', undefined, { githubId, targetContributionCount });
+  UPDATE_MAIN_VIEW();
+  SHOW_MAIN_VIEW();
 });
