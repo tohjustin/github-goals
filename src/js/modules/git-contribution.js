@@ -1,6 +1,7 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
 import moment from 'moment';
+import * as store from './store';
 
 export const getAllContributions = username =>
   new Promise((resolve, reject) => {
@@ -25,7 +26,10 @@ export const getAllContributions = username =>
 
         resolve(contributionData);
       })
-      .catch(error => reject(error));
+      .catch((error) => {
+        store.reset();
+        reject(error);
+      });
   });
 
 export const getContributionsOfTheDay = username =>
@@ -42,7 +46,7 @@ export const getContributionsOfTheDay = username =>
 
       return commitCount;
     })
-    .catch(() => -1);
+    .catch(() => undefined);
 
 export const getContributionsSummary = username =>
   getAllContributions(username)
@@ -78,4 +82,4 @@ export const getContributionsSummary = username =>
 
       return { dayCount, weekCount, monthCount };
     })
-    .catch(() => -1);
+    .catch(() => undefined);
