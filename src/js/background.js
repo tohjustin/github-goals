@@ -7,8 +7,9 @@ import * as theme from './modules/theme';
  GLOBAL CONSTANTS & VARS (bad practice T_T)
 -------------------------------------- */
 const UPDATE_INTERVAL = 2 * 60 * 1000;
-let TARGET_CONTRIBUTION_COUNT = 0;
-let GITHUB_USERNAME = '';
+let TARGET_CONTRIBUTION_COUNT;
+let GITHUB_USERNAME;
+let BACKGROUND_WORKER;
 
 /* --------------------------------------
  MAIN FUNCTIONS
@@ -16,9 +17,14 @@ let GITHUB_USERNAME = '';
 // Defined as non-arrow function so that we can update the Global variables
 function SYNC_USERDATA() {
   const temp = store.load();
-  const { targetContributionCount, githubId } = temp;
-  TARGET_CONTRIBUTION_COUNT = targetContributionCount;
-  GITHUB_USERNAME = githubId;
+  if (temp) {
+    const { targetContributionCount, githubId } = temp;
+    TARGET_CONTRIBUTION_COUNT = targetContributionCount;
+    GITHUB_USERNAME = githubId;
+    return true;
+  }
+
+  return false;
 }
 
 const _UPDATE_BADGE = ({ color, text }) => {
@@ -44,26 +50,33 @@ const UPDATE_BADGE = (githubId, value) => {
   }
 };
 
-/* --------------------------------------
- GLOBAL CONSTANTS & VARS (bad practice T_T)
--------------------------------------- */
-SYNC_USERDATA();
+/* scrap & update commit count periodically + configure it to repeat it periodically */
+const START_WORKER = (githubId, updateInterval) => {
+  if (BACKGROUND_WORKER) {
+    clearInterval(BACKGROUND_WORKER);
+  }
+  return setInterval(() => {
+    UPDATE_BADGE(githubId);
+  }, updateInterval);
+};
 
+/* --------------------------------------
+ START OF APPLICATION
+-------------------------------------- */
 /* initialize message-passing module to listen for popup events */
 _msg.init('bg', {
-  setUserData: (done, { githubId, targetContributionCount }) => {
-    store.save({ githubId, targetContributionCount });
-    SYNC_USERDATA();
-    UPDATE_BADGE(GITHUB_USERNAME);
-  },
-  getUserData: (done) => {
-    done(store.load());
+  updateData: () => {
+    if (SYNC_USERDATA() === true) {
+      UPDATE_BADGE(GITHUB_USERNAME);
+      BACKGROUND_WORKER = START_WORKER(GITHUB_USERNAME, UPDATE_INTERVAL);
+    }
   },
   updateBadgeText: (done, { text, color }) => {
     UPDATE_BADGE(GITHUB_USERNAME, { text, color });
   }
 });
 
-/* scrap & update commit count periodically + configure it to repeat it periodically */
-UPDATE_BADGE(GITHUB_USERNAME);
-setInterval(() => { UPDATE_BADGE(GITHUB_USERNAME); }, UPDATE_INTERVAL);
+if (SYNC_USERDATA() === true) {
+  UPDATE_BADGE(GITHUB_USERNAME);
+  BACKGROUND_WORKER = START_WORKER(GITHUB_USERNAME, UPDATE_INTERVAL);
+}

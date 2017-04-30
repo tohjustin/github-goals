@@ -1,5 +1,6 @@
 import moment from 'moment';
 import _msg from './modules/msg';
+import * as store from './modules/store';
 import * as theme from './modules/theme';
 import * as contributions from './modules/git-contribution';
 
@@ -64,23 +65,31 @@ const SHOW_FORM_VIEW = () => {
   document.getElementById('formView').style.display = 'block';
 };
 const UPDATE_MAIN_VIEW = () => {
-  /* request user's github data from the background page */
-  msg.bg('getUserData', ({ githubId, targetContributionCount }) => {
+  const data = store.load();
+  if (data) {
+    const { targetContributionCount, githubId } = store.load();
     updateContributions({ githubId, targetContributionCount });
     updateAvatar(githubId);
-  });
+  }
 };
 
 /* --------------------------------------
  START OF APPLICATION
 -------------------------------------- */
-SHOW_FORM_VIEW();
+if (store.load()) {
+  UPDATE_MAIN_VIEW();
+  SHOW_MAIN_VIEW();
+} else {
+  SHOW_FORM_VIEW();
+}
+
 document.getElementById('formView-submit').addEventListener('click', () => {
   const githubId = document.getElementById('formView-id').value;
   const targetContributionCount = parseInt(document.getElementById('formView-count').value, 10);
 
   /* request background to set user data */
-  msg.bg('setUserData', undefined, { githubId, targetContributionCount });
+  msg.bg('updateData');
+  store.save({ githubId, targetContributionCount });
   UPDATE_MAIN_VIEW();
   SHOW_MAIN_VIEW();
 });
