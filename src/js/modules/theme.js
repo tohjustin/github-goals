@@ -1,12 +1,11 @@
 export const getColor = (percentage) => {
-  if (percentage >= 125) {
-    // return '#8F2CFA';
-    return '#0366D6';
-  } else if (percentage >= 100) {
-    return '#7ED321';
-  } else if (percentage >= 50) {
+  if (percentage < 50) {
+    return '#F40F2B';
+  } else if (percentage < 100) {
     return '#F5A623';
+  } else if (isFinite(percentage)) {
+    return '#7ED321';
   }
 
-  return '#F40F2B';
+  return '#0366D6';
 };

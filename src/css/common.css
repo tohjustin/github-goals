@@ -35,7 +35,7 @@
   width: -o-calc(100% - 8px);
   width: calc(100% - 8px);
   margin-top: 6px;
-  border: 1px solid lightgrey;
+  border: 1px solid #D8D8D8;
   border-radius: 5px;
   padding-left: 6px;
   padding-top: 5px;
@@ -76,7 +76,7 @@
 }
 .btn-secondary {
   color: #333333;
-  background-color: lightgrey;
+  background-color: #D8D8D8;
   margin-right: 10px;
 }
 .btn-secondary:hover {
