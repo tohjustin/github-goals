@@ -6,7 +6,7 @@ import * as theme from './modules/theme';
 /* --------------------------------------
  GLOBAL CONSTANTS & VARS (bad practice T_T)
 -------------------------------------- */
-const UPDATE_INTERVAL = 2 * 60 * 1000;
+const UPDATE_INTERVAL = 2 * 60 * 1000; // 2 mins
 let TARGET_CONTRIBUTION_COUNT;
 let GITHUB_USERNAME;
 let BACKGROUND_WORKER;
@@ -35,12 +35,17 @@ const UPDATE_BADGE = (githubId, value) => {
   } else {
     contributions.getContributionsOfTheDay(githubId)
       .then((commitCount) => {
-        chrome.browserAction.setBadgeBackgroundColor({
-          color: theme.getColor(Math.round((commitCount / TARGET_CONTRIBUTION_COUNT) * 100))
-        });
-        chrome.browserAction.setBadgeText({
-          text: commitCount.toString()
-        });
+        if (commitCount) {
+          chrome.browserAction.setBadgeBackgroundColor({
+            color: theme.getColor(Math.round((commitCount / TARGET_CONTRIBUTION_COUNT) * 100))
+          });
+          chrome.browserAction.setBadgeText({
+            text: commitCount.toString()
+          });
+        } else {
+          chrome.browserAction.setBadgeBackgroundColor({ color: theme.getColor(0) });
+          chrome.browserAction.setBadgeText({ text: '?' });
+        }
       })
       .catch(() => {
         console.log('[UPDATE_BADGE, contributions.getContributionsOfTheDay] ERROR!');
