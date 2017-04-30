@@ -67,7 +67,7 @@ const SHOW_FORM_VIEW = () => {
 const UPDATE_MAIN_VIEW = () => {
   const data = store.load();
   if (data) {
-    const { targetContributionCount, githubId } = store.load();
+    const { targetContributionCount, githubId } = data;
     updateContributions({ githubId, targetContributionCount });
     updateAvatar(githubId);
   }
@@ -93,4 +93,8 @@ document.getElementById('formView-submit').addEventListener('click', () => {
 
   /* request background to update their local data */
   msg.bg('updateData');
+});
+
+document.getElementById('formView-cancel').addEventListener('click', () => {
+  SHOW_MAIN_VIEW();
 });
