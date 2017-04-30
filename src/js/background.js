@@ -2,7 +2,7 @@ import * as contributions from './modules/git-contribution';
 import _msg from './modules/msg';
 import * as theme from './modules/theme';
 
-/* Scraps & update commit count every 2 minutes */
+/* CONSTANTS & MACROS */
 const UPDATE_INTERVAL = 2 * 60 * 1000;
 const TARGET_CONTRIBUTION_COUNT = 10;
 const GITHUB_USERNAME = 'tohjustin';
@@ -11,6 +11,7 @@ const _UPDATE_BADGE = ({ color, text }) => {
   chrome.browserAction.setBadgeText({ text });
 };
 
+/* updates extension's badge */
 const updateBadge = (username, value) => {
   if (value) {
     _UPDATE_BADGE(value);
@@ -28,6 +29,7 @@ const updateBadge = (username, value) => {
   }
 };
 
+/* initialize message-passing module to listen for popup events */
 _msg.init('bg', {
   getUserData: (done) => {
     done({
@@ -40,9 +42,6 @@ _msg.init('bg', {
   }
 });
 
-/* Configure extension to scrap & update commit count periodically */
-setInterval(() => {
-  updateBadge(GITHUB_USERNAME);
-}, UPDATE_INTERVAL);
-
+/* scrap & update commit count periodically + configure it to repeat it periodically */
 updateBadge(GITHUB_USERNAME);
+setInterval(updateBadge(GITHUB_USERNAME), UPDATE_INTERVAL);
