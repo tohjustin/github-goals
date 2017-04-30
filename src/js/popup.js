@@ -21,8 +21,10 @@ const updateContributions = ({ githubUsername, targetContributionCount }) => {
       document.getElementById('day-progessBar').style.width = computedStyle.width;
       document.getElementById('day-progessBar').style.backgroundColor = computedStyle.color;
 
-      const { text, color } = computedStyle;
-      msg.bg('updateBadgeText', undefined, { text, color });
+      msg.bg('updateBadgeText', undefined, {
+        text: commits.dayCount.toString(),
+        color: computedStyle.color
+      });
 
       computedStyle = computeStyle(commits.weekCount, targetContributionCount * 7);
       document.getElementById('week-value').textContent = computedStyle.text;
