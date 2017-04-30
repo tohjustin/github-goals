@@ -6,24 +6,24 @@ import * as theme from './modules/theme';
 const UPDATE_INTERVAL = 2 * 60 * 1000;
 const TARGET_CONTRIBUTION_COUNT = 10;
 const GITHUB_USERNAME = 'tohjustin';
+const _UPDATE_BADGE = ({ color, text }) => {
+  chrome.browserAction.setBadgeBackgroundColor({ color });
+  chrome.browserAction.setBadgeText({ text });
+};
 
 const updateBadge = (username, value) => {
   if (value) {
-    const { color, text } = value;
-    chrome.browserAction.setBadgeBackgroundColor({ color });
-    chrome.browserAction.setBadgeText({ text });
+    _UPDATE_BADGE(value);
   } else {
     contributions.getContributionsOfTheDay(username)
       .then((commitCount) => {
-        chrome.browserAction.setBadgeBackgroundColor({
-          color: theme.getColor(Math.round((commitCount / TARGET_CONTRIBUTION_COUNT) * 100))
-        });
-        chrome.browserAction.setBadgeText({
+        _UPDATE_BADGE({
+          color: theme.getColor(Math.round((commitCount / TARGET_CONTRIBUTION_COUNT) * 100)),
           text: commitCount.toString()
         });
       })
       .catch(() => {
-        chrome.browserAction.setBadgeText({ text: 'X' });
+        console.log('[updateBadge, contributions.getContributionsOfTheDay] ERROR!');
       });
   }
 };
