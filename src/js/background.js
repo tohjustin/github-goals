@@ -27,20 +27,18 @@ function SYNC_USERDATA() {
   return false;
 }
 
-const _UPDATE_BADGE = ({ color, text }) => {
-  chrome.browserAction.setBadgeBackgroundColor({ color });
-  chrome.browserAction.setBadgeText({ text });
-};
-
 /* updates extension's badge */
 const UPDATE_BADGE = (githubId, value) => {
   if (value) {
-    _UPDATE_BADGE(value);
+    chrome.browserAction.setBadgeBackgroundColor({ color: value.color });
+    chrome.browserAction.setBadgeText({ text: value.text });
   } else {
     contributions.getContributionsOfTheDay(githubId)
       .then((commitCount) => {
-        _UPDATE_BADGE({
-          color: theme.getColor(Math.round((commitCount / TARGET_CONTRIBUTION_COUNT) * 100)),
+        chrome.browserAction.setBadgeBackgroundColor({
+          color: theme.getColor(Math.round((commitCount / TARGET_CONTRIBUTION_COUNT) * 100))
+        });
+        chrome.browserAction.setBadgeText({
           text: commitCount.toString()
         });
       })
@@ -51,14 +49,8 @@ const UPDATE_BADGE = (githubId, value) => {
 };
 
 /* scrap & update commit count periodically + configure it to repeat it periodically */
-const START_WORKER = (githubId, updateInterval) => {
-  if (BACKGROUND_WORKER) {
-    clearInterval(BACKGROUND_WORKER);
-  }
-  return setInterval(() => {
-    UPDATE_BADGE(githubId);
-  }, updateInterval);
-};
+const INIT_WORKER = (githubId, updateInterval) =>
+  setInterval(() => { UPDATE_BADGE(githubId); }, updateInterval);
 
 /* --------------------------------------
  START OF APPLICATION
@@ -68,7 +60,8 @@ _msg.init('bg', {
   updateData: () => {
     if (SYNC_USERDATA() === true) {
       UPDATE_BADGE(GITHUB_USERNAME);
-      BACKGROUND_WORKER = START_WORKER(GITHUB_USERNAME, UPDATE_INTERVAL);
+      clearInterval(BACKGROUND_WORKER);
+      BACKGROUND_WORKER = INIT_WORKER(GITHUB_USERNAME, UPDATE_INTERVAL);
     }
   },
   updateBadgeText: (done, { text, color }) => {
@@ -78,5 +71,6 @@ _msg.init('bg', {
 
 if (SYNC_USERDATA() === true) {
   UPDATE_BADGE(GITHUB_USERNAME);
-  BACKGROUND_WORKER = START_WORKER(GITHUB_USERNAME, UPDATE_INTERVAL);
+  clearInterval(BACKGROUND_WORKER);
+  BACKGROUND_WORKER = INIT_WORKER(GITHUB_USERNAME, UPDATE_INTERVAL);
 }

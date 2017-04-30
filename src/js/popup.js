@@ -86,10 +86,11 @@ if (store.load()) {
 document.getElementById('formView-submit').addEventListener('click', () => {
   const githubId = document.getElementById('formView-id').value;
   const targetContributionCount = parseInt(document.getElementById('formView-count').value, 10);
-
-  /* request background to set user data */
-  msg.bg('updateData');
   store.save({ githubId, targetContributionCount });
+
   UPDATE_MAIN_VIEW();
   SHOW_MAIN_VIEW();
+
+  /* request background to update their local data */
+  msg.bg('updateData');
 });
