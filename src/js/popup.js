@@ -14,8 +14,8 @@ const computeStyle = (count, totalCount) => {
   return { color, text, width };
 };
 
-const updateContributions = ({ githubUsername, targetContributionCount }) => {
-  contributions.getContributionsSummary(githubUsername)
+const updateContributions = ({ githubId, targetContributionCount }) => {
+  contributions.getContributionsSummary(githubId)
     .then((commits) => {
       /* update daily progess bar */
       let computedStyle = computeStyle(commits.dayCount, targetContributionCount);
@@ -46,14 +46,26 @@ const updateContributions = ({ githubUsername, targetContributionCount }) => {
 };
 
 /* update avatar image, userId & link to github profile page */
-const updateAvatar = (githubUsername) => {
-  document.getElementById('user-link').href = `https://www.github.com/${githubUsername}`;
-  document.getElementById('user-link').textContent = `${githubUsername}'s`;
-  document.getElementById('user-avatar').src = `https://avatars0.githubusercontent.com/${githubUsername}`;
+const updateAvatar = (githubId) => {
+  document.getElementById('user-link').href = `https://www.github.com/${githubId}`;
+  document.getElementById('user-link').textContent = `${githubId}'s`;
+  document.getElementById('user-avatar').src = `https://avatars0.githubusercontent.com/${githubId}`;
 };
 
 /* request user's github data from the background page */
-msg.bg('getUserData', ({ githubUsername, targetContributionCount }) => {
-  updateContributions({ githubUsername, targetContributionCount });
-  updateAvatar(githubUsername);
+msg.bg('getUserData', ({ githubId, targetContributionCount }) => {
+  updateContributions({ githubId, targetContributionCount });
+  updateAvatar(githubId);
+});
+
+/* --------------------------------------
+ START OF APPLICATION
+-------------------------------------- */
+
+document.getElementById('formView-submit').addEventListener('click', () => {
+  const githubId = document.getElementById('formView-id').value;
+  const targetContributionCount = parseInt(document.getElementById('formView-count').value, 10);
+
+  /* request background to set user data */
+  msg.bg('setUserData', undefined, { githubId, targetContributionCount });
 });

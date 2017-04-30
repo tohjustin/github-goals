@@ -51,6 +51,11 @@ SYNC_USERDATA();
 
 /* initialize message-passing module to listen for popup events */
 _msg.init('bg', {
+  setUserData: (done, { githubId, targetContributionCount }) => {
+    store.save({ githubId, targetContributionCount });
+    SYNC_USERDATA();
+    UPDATE_BADGE(GITHUB_USERNAME);
+  },
   getUserData: (done) => {
     done(store.load());
   },

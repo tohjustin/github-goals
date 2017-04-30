@@ -6,39 +6,48 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   </head>
   <body class="body">
-    <div class="userInfo">
-        <img id="user-avatar" src="https://www.github.com/"/>
-        <div class="description">
-          <a id="user-link" href="https://www.github.com/" target="_blank"></a>
-          <div>Contribution Summary</div>
-        </div>
+    <div id="formView" class="form">
+      <p>Github Id</p>
+      <input id="formView-id" type="text" style="font-size: 16px;">
+      <p>Target number of daily Github contributions</p>
+      <input id="formView-count" type="text" style="font-size: 16px;">
+      <button id="formView-submit">OK</button>
     </div>
-    <div class="stats">
-      <div class="section day">
-        <span>
-          <div class="title">Today</div>
-          <div id="day-value" class="value"></div>
-        </span>
-        <div class="progressBar">
-          <span id="day-progessBar" style="width: 0%; background-color: #D8D8D8;"></span>
-        </div>
+    <div id="mainView" class="main">
+      <div class="userInfo">
+          <img id="user-avatar" src="https://www.github.com/"/>
+          <div class="description">
+            <a id="user-link" href="https://www.github.com/" target="_blank"></a>
+            <div>Contribution Summary</div>
+          </div>
       </div>
-      <div class="section week">
-        <span>
-          <div class="title">Current Week</div>
-          <div id="week-value" class="value"></div>
-        </span>
-        <div class="progressBar">
-          <span id="week-progessBar" style="width: 0%; background-color: #D8D8D8;"></span>
+      <div class="stats">
+        <div class="section day">
+          <span>
+            <div class="title">Today</div>
+            <div id="day-value" class="value"></div>
+          </span>
+          <div class="progressBar">
+            <span id="day-progessBar" style="width: 0%; background-color: #D8D8D8;"></span>
+          </div>
         </div>
-      </div>
-      <div class="section month">
-        <span>
-          <div id="month-name" class="title">Current Month</div>
-          <div id="month-value" class="value"></div>
-        </span>
-        <div class="progressBar">
-          <span id="month-progessBar" style="width: 0%; background-color: #D8D8D8;"></span>
+        <div class="section week">
+          <span>
+            <div class="title">Current Week</div>
+            <div id="week-value" class="value"></div>
+          </span>
+          <div class="progressBar">
+            <span id="week-progessBar" style="width: 0%; background-color: #D8D8D8;"></span>
+          </div>
+        </div>
+        <div class="section month">
+          <span>
+            <div id="month-name" class="title">Current Month</div>
+            <div id="month-value" class="value"></div>
+          </span>
+          <div class="progressBar">
+            <span id="month-progessBar" style="width: 0%; background-color: #D8D8D8;"></span>
+          </div>
         </div>
       </div>
     </div>
