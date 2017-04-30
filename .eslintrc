@@ -17,7 +17,8 @@
     "react/require-default-props": 0,
     "no-underscore-dangle": 0,
     "yoda": 0,
-    "prefer-rest-params": 0
+    "prefer-rest-params": 0,
+    "no-console": 0
   },
   "settings": {
     "import/resolver": {
