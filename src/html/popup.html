@@ -9,11 +9,11 @@
     <div id="formView">
       <div class="form">
         <div class="form-input">
-          <div>Github Id</div>
+          <div>Github ID</div>
           <input id="formView-id" type="text">
         </div>
         <div class="form-input">
-          <div>Target number of daily Github contributions</div>
+          <div>Target amount of daily contributions</div>
           <input id="formView-count" type="text">
         </div>
         <div class="form-btn">
@@ -25,11 +25,14 @@
     <div id="mainView">
       <div class="main">
         <div class="userInfo">
-            <img id="user-avatar" class="avatar" src="https://www.github.com/"/>
-            <div class="description">
+            <img id="user-avatar" class="avatar" src="../images/avatar.png"/>
+            <div id="description-configured" class="description">
               <a id="user-link" href="https://www.github.com/" target="_blank"></a>
-              <img id="user-editIcon" class="editIcon" src="../images/editIcon.png"/>
+              <img id="user-editBtn" class="editIcon" src="../images/editIcon.png"/>
               <div>Contribution Summary</div>
+            </div>
+            <div id="description-unconfigured" class="description" style="height: inherit;">
+              <button id="user-configureBtn" class="btn btn-primary" style="height: 100%; width: 195px;">Configure Github ID</button>
             </div>
         </div>
         <div class="stats">

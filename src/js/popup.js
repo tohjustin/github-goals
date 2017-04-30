@@ -18,8 +18,14 @@ const computeStyle = (count, totalCount) => {
 const updateContributions = ({ githubId, targetContributionCount }) => {
   contributions.getContributionsSummary(githubId)
     .then((commits) => {
+      if (!commits) {
+        document.getElementById('day-value').textContent = '';
+        document.getElementById('week-value').textContent = '';
+        document.getElementById('month-value').textContent = '';
+      }
+
       /* update daily progess bar */
-      let computedStyle = computeStyle(commits.dayCount, targetContributionCount);
+      let computedStyle = computeStyle(commits.dayCount, targetContributionCount * 1);
       document.getElementById('day-value').textContent = computedStyle.text;
       document.getElementById('day-progessBar').style.width = computedStyle.width;
       document.getElementById('day-progessBar').style.backgroundColor = computedStyle.color;
@@ -39,7 +45,6 @@ const updateContributions = ({ githubId, targetContributionCount }) => {
       /* update monthly progess bar */
       computedStyle = computeStyle(commits.monthCount,
         targetContributionCount * moment().daysInMonth());
-      document.getElementById('month-name').textContent = `Month of ${moment().format('MMMM')}`;
       document.getElementById('month-value').textContent = computedStyle.text;
       document.getElementById('month-progessBar').style.width = computedStyle.width;
       document.getElementById('month-progessBar').style.backgroundColor = computedStyle.color;
@@ -59,12 +64,21 @@ const updateAvatar = (githubId) => {
 const SHOW_MAIN_VIEW = () => {
   document.getElementById('mainView').style.display = 'block';
   document.getElementById('formView').style.display = 'none';
+
+  if (store.load()) {
+    document.getElementById('description-configured').style.display = 'block';
+    document.getElementById('description-unconfigured').style.display = 'none';
+  } else {
+    document.getElementById('description-configured').style.display = 'none';
+    document.getElementById('description-unconfigured').style.display = 'block';
+  }
 };
 const SHOW_FORM_VIEW = () => {
   document.getElementById('mainView').style.display = 'none';
   document.getElementById('formView').style.display = 'block';
 };
 const UPDATE_MAIN_VIEW = () => {
+  document.getElementById('month-name').textContent = `Month of ${moment().format('MMMM')}`;
   const data = store.load();
   if (data) {
     const { targetContributionCount, githubId } = data;
@@ -76,12 +90,8 @@ const UPDATE_MAIN_VIEW = () => {
 /* --------------------------------------
  START OF APPLICATION
 -------------------------------------- */
-if (store.load()) {
-  UPDATE_MAIN_VIEW();
-  SHOW_MAIN_VIEW();
-} else {
-  SHOW_FORM_VIEW();
-}
+UPDATE_MAIN_VIEW();
+SHOW_MAIN_VIEW();
 
 document.getElementById('formView-submit').addEventListener('click', () => {
   const githubId = document.getElementById('formView-id').value;
@@ -91,20 +101,25 @@ document.getElementById('formView-submit').addEventListener('click', () => {
   UPDATE_MAIN_VIEW();
   SHOW_MAIN_VIEW();
 
-  /* request background to update their local data */
-  msg.bg('updateData');
+  msg.bg('updateData'); /* request background to update their local data */
 });
 
 document.getElementById('formView-cancel').addEventListener('click', () => {
   SHOW_MAIN_VIEW();
 });
 
-document.getElementById('user-editIcon').addEventListener('click', () => {
+document.getElementById('user-editBtn').addEventListener('click', () => {
+  /* Populate fields if localStorage has our data */
   const data = store.load();
   if (data) {
     const { targetContributionCount, githubId } = data;
     document.getElementById('formView-id').value = githubId;
     document.getElementById('formView-count').value = targetContributionCount;
   }
+
+  SHOW_FORM_VIEW();
+});
+
+document.getElementById('user-configureBtn').addEventListener('click', () => {
   SHOW_FORM_VIEW();
 });

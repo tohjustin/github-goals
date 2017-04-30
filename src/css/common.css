@@ -58,7 +58,7 @@
   justify-content: center;
   align-items: center;
   border: none;
-  border-radius: 5px;
+  border-radius: 3px;
   padding-left: 20px;
   padding-right: 20px;
   height: 35px;
@@ -83,8 +83,12 @@
   background-color: #EEEEEE;
 }
 
-#main {
+#mainView {
   display: none;
+  height: 100%
+}
+#user-configureBtn {
+  outline: 0;
 }
 .main {
   margin: 20px;
@@ -102,7 +106,7 @@
 }
 .userInfo .avatar {
   height: 100%;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 .userInfo .editIcon {
   height: 15px;
