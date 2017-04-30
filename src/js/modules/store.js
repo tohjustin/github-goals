@@ -11,3 +11,10 @@ export const load = () => {
   console.log('Retrieving data from localStorage', data, parsedData);
   return parsedData;
 };
+
+export const reset = () => {
+  const data = localStorage.getItem(LOCALSTORAGE_KEY);
+  const parsedData = JSON.parse(data);
+  console.log('Clearing data from localStorage', data, parsedData);
+  localStorage.removeItem(LOCALSTORAGE_KEY);
+};
