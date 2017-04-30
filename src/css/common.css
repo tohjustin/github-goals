@@ -173,6 +173,7 @@
   background: #D8D8D8;
 }
 .progressBar > span {
+  width: 0;
   display: block;
   position: relative;
   overflow: hidden;
