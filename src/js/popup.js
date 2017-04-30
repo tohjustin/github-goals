@@ -98,3 +98,13 @@ document.getElementById('formView-submit').addEventListener('click', () => {
 document.getElementById('formView-cancel').addEventListener('click', () => {
   SHOW_MAIN_VIEW();
 });
+
+document.getElementById('user-editIcon').addEventListener('click', () => {
+  const data = store.load();
+  if (data) {
+    const { targetContributionCount, githubId } = data;
+    document.getElementById('formView-id').value = githubId;
+    document.getElementById('formView-count').value = targetContributionCount;
+  }
+  SHOW_FORM_VIEW();
+});

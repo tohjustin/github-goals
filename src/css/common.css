@@ -100,9 +100,17 @@
   margin-bottom: 15px;
   height: 50px;
 }
-.userInfo img {
+.userInfo .avatar {
   height: 100%;
   border-radius: 5px;
+}
+.userInfo .editIcon {
+  height: 15px;
+  margin-left: 2px;
+  cursor: pointer;
+}
+.userInfo .editIcon:hover {
+  filter: brightness(50%);
 }
 .userInfo .description {
   font-size: 16px;
