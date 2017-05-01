@@ -9,7 +9,7 @@ export const load = () => {
   const data = localStorage.getItem(LOCALSTORAGE_KEY);
   const parsedData = JSON.parse(data);
   console.log('Retrieving data from localStorage', data, parsedData);
-  return parsedData;
+  return (parsedData !== undefined && parsedData !== null) ? parsedData : false;
 };
 
 export const reset = () => {

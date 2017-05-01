@@ -46,7 +46,7 @@ export const getContributionsOfTheDay = username =>
 
       return commitCount;
     })
-    .catch(() => undefined);
+    .catch(() => -1);
 
 export const getContributionsSummary = username =>
   getAllContributions(username)
@@ -82,4 +82,4 @@ export const getContributionsSummary = username =>
 
       return { dayCount, weekCount, monthCount };
     })
-    .catch(() => undefined);
+    .catch(() => ({}));

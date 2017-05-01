@@ -6,8 +6,11 @@ import * as contributions from './modules/git-contribution';
 
 const msg = _msg.init('popup');
 
+/* --------------------------------------
+ MAIN UI HANDLING FUNCTIONS
+-------------------------------------- */
 /* compute CSS styles for progress bar */
-const computeStyle = (count, totalCount) => {
+const COMPUTE_STYLE = (count, totalCount) => {
   const text = `${count}/${totalCount} commits`;
   const percentage = Math.round((count / totalCount) * 100);
   const width = `${(percentage > 100) ? 100 : percentage}%`;
@@ -15,17 +18,11 @@ const computeStyle = (count, totalCount) => {
   return { color, text, width };
 };
 
-const updateContributions = ({ githubId, targetContributionCount }) => {
+const UPDATE_CONTRIBUTIONS = ({ githubId, targetContributionCount }) => {
   contributions.getContributionsSummary(githubId)
     .then((commits) => {
-      if (commits === undefined || commits === null) {
-        document.getElementById('day-value').textContent = '';
-        document.getElementById('week-value').textContent = '';
-        document.getElementById('month-value').textContent = '';
-      }
-
       /* update daily progess bar */
-      let computedStyle = computeStyle(commits.dayCount, targetContributionCount * 1);
+      let computedStyle = COMPUTE_STYLE(commits.dayCount, targetContributionCount * 1);
       document.getElementById('day-value').textContent = computedStyle.text;
       document.getElementById('day-progessBar').style.width = computedStyle.width;
       document.getElementById('day-progessBar').style.backgroundColor = computedStyle.color;
@@ -37,13 +34,13 @@ const updateContributions = ({ githubId, targetContributionCount }) => {
       });
 
       /* update weekly progess bar */
-      computedStyle = computeStyle(commits.weekCount, targetContributionCount * 7);
+      computedStyle = COMPUTE_STYLE(commits.weekCount, targetContributionCount * 7);
       document.getElementById('week-value').textContent = computedStyle.text;
       document.getElementById('week-progessBar').style.width = computedStyle.width;
       document.getElementById('week-progessBar').style.backgroundColor = computedStyle.color;
 
       /* update monthly progess bar */
-      computedStyle = computeStyle(commits.monthCount,
+      computedStyle = COMPUTE_STYLE(commits.monthCount,
         targetContributionCount * moment().daysInMonth());
       document.getElementById('month-value').textContent = computedStyle.text;
       document.getElementById('month-progessBar').style.width = computedStyle.width;
@@ -52,21 +49,55 @@ const updateContributions = ({ githubId, targetContributionCount }) => {
 };
 
 /* update avatar image, userId & link to github profile page */
-const updateAvatar = (githubId) => {
+const UPDATE_AVATAR = (githubId) => {
   document.getElementById('user-link').href = `https://www.github.com/${githubId}`;
   document.getElementById('user-link').textContent = `${githubId}'s`;
   document.getElementById('user-avatar').src = `https://avatars0.githubusercontent.com/${githubId}`;
 };
 
+const UPDATE_MONTH_LABEL = () => {
+  document.getElementById('month-name').textContent = `Month of ${moment().format('MMMM')}`;
+};
+
 /* --------------------------------------
- VIEW FUNCTIONS
+ FORM UI HANDLING FUNCTIONS
+-------------------------------------- */
+const PREPOPULATE_INPUT_FIELDS = () => {
+  const data = store.load();
+  if (data) {
+    const { targetContributionCount, githubId } = data;
+    document.getElementById('formView-id').value = githubId;
+    document.getElementById('formView-count').value = targetContributionCount;
+  }
+};
+
+const CLEAR_INPUT_FIELDS = () => {
+  document.getElementById('formView-id').value = '';
+  document.getElementById('formView-count').value = '';
+};
+
+/* --------------------------------------
+ DATA HANDLING FUNCTIONS
+-------------------------------------- */
+const SAVE_DATA = () => {
+  const githubId = document.getElementById('formView-id').value;
+  const targetContributionCount = parseInt(document.getElementById('formView-count').value, 10);
+  store.save({ githubId, targetContributionCount });
+};
+
+const SYNC_BACKGROUND_DATA = () => {
+  msg.bg('syncData'); /* request background to update their local data */
+};
+
+/* --------------------------------------
+ VIEW TOGGLING FUNCTIONS
 -------------------------------------- */
 const SHOW_MAIN_VIEW = () => {
   document.getElementById('mainView').style.display = 'block';
   document.getElementById('formView').style.display = 'none';
 
   const data = store.load();
-  if (data !== undefined && data !== null) {
+  if (data) {
     document.getElementById('description-configured').style.display = 'block';
     document.getElementById('description-unconfigured').style.display = 'none';
   } else {
@@ -74,6 +105,7 @@ const SHOW_MAIN_VIEW = () => {
     document.getElementById('description-unconfigured').style.display = 'block';
   }
 };
+
 const SHOW_FORM_VIEW = () => {
   document.getElementById('mainView').style.display = 'none';
   document.getElementById('formView').style.display = 'block';
@@ -81,48 +113,44 @@ const SHOW_FORM_VIEW = () => {
   /* Focus on first input field in the form */
   document.getElementById('formView-id').focus();
 };
+
 const UPDATE_MAIN_VIEW = () => {
   const data = store.load();
-  if (data !== undefined && data !== null) {
+  if (data) {
     const { targetContributionCount, githubId } = data;
-    updateContributions({ githubId, targetContributionCount });
-    updateAvatar(githubId);
+    UPDATE_CONTRIBUTIONS({ githubId, targetContributionCount });
+    UPDATE_AVATAR(githubId);
   }
 };
 
 /* --------------------------------------
- START OF APPLICATION
+ ATTACHING EVENT LISTENERS
 -------------------------------------- */
-/* update label with current month */
-document.getElementById('month-name').textContent = `Month of ${moment().format('MMMM')}`;
-UPDATE_MAIN_VIEW();
-SHOW_MAIN_VIEW();
-
-document.getElementById('formView-submit').addEventListener('click', () => {
-  const githubId = document.getElementById('formView-id').value;
-  const targetContributionCount = parseInt(document.getElementById('formView-count').value, 10);
-  store.save({ githubId, targetContributionCount });
-
-  UPDATE_MAIN_VIEW();
-  SHOW_MAIN_VIEW();
-
-  msg.bg('updateData'); /* request background to update their local data */
-});
-
-document.getElementById('formView-cancel').addEventListener('click', () => {
-  SHOW_MAIN_VIEW();
-  document.getElementById('formView-id').value = '';
-  document.getElementById('formView-count').value = '';
-});
-
 document.getElementById('user-editBtn').addEventListener('click', () => {
-  /* Populate fields if localStorage has our data */
-  const { targetContributionCount, githubId } = store.load();
-  document.getElementById('formView-id').value = githubId;
-  document.getElementById('formView-count').value = targetContributionCount;
+  PREPOPULATE_INPUT_FIELDS();
   SHOW_FORM_VIEW();
 });
 
 document.getElementById('user-configureBtn').addEventListener('click', () => {
   SHOW_FORM_VIEW();
 });
+
+document.getElementById('formView-cancel').addEventListener('click', () => {
+  SHOW_MAIN_VIEW();
+  CLEAR_INPUT_FIELDS();
+});
+
+document.getElementById('formView-submit').addEventListener('click', () => {
+  SAVE_DATA();
+  UPDATE_MAIN_VIEW();
+  SHOW_MAIN_VIEW();
+  CLEAR_INPUT_FIELDS();
+  SYNC_BACKGROUND_DATA();
+});
+
+/* --------------------------------------
+ START OF APPLICATION
+-------------------------------------- */
+UPDATE_MONTH_LABEL();
+UPDATE_MAIN_VIEW();
+SHOW_MAIN_VIEW();
