@@ -76,6 +76,9 @@ const SHOW_MAIN_VIEW = () => {
 const SHOW_FORM_VIEW = () => {
   document.getElementById('mainView').style.display = 'none';
   document.getElementById('formView').style.display = 'block';
+
+  /* Focus on first input field in the form */
+  document.getElementById('formView-id').focus();
 };
 const UPDATE_MAIN_VIEW = () => {
   const data = store.load();
