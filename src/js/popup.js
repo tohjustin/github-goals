@@ -78,7 +78,6 @@ const SHOW_FORM_VIEW = () => {
   document.getElementById('formView').style.display = 'block';
 };
 const UPDATE_MAIN_VIEW = () => {
-  document.getElementById('month-name').textContent = `Month of ${moment().format('MMMM')}`;
   const data = store.load();
   if (data) {
     const { targetContributionCount, githubId } = data;
@@ -90,6 +89,8 @@ const UPDATE_MAIN_VIEW = () => {
 /* --------------------------------------
  START OF APPLICATION
 -------------------------------------- */
+/* update label with current month */
+document.getElementById('month-name').textContent = `Month of ${moment().format('MMMM')}`;
 UPDATE_MAIN_VIEW();
 SHOW_MAIN_VIEW();
 
