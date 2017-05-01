@@ -111,17 +111,15 @@ document.getElementById('formView-submit').addEventListener('click', () => {
 
 document.getElementById('formView-cancel').addEventListener('click', () => {
   SHOW_MAIN_VIEW();
+  document.getElementById('formView-id').value = '';
+  document.getElementById('formView-count').value = '';
 });
 
 document.getElementById('user-editBtn').addEventListener('click', () => {
   /* Populate fields if localStorage has our data */
-  const data = store.load();
-  if (data !== undefined && data !== null) {
-    const { targetContributionCount, githubId } = data;
-    document.getElementById('formView-id').value = githubId;
-    document.getElementById('formView-count').value = targetContributionCount;
-  }
-
+  const { targetContributionCount, githubId } = store.load();
+  document.getElementById('formView-id').value = githubId;
+  document.getElementById('formView-count').value = targetContributionCount;
   SHOW_FORM_VIEW();
 });
 
