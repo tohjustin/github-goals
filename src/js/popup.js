@@ -18,7 +18,7 @@ const computeStyle = (count, totalCount) => {
 const updateContributions = ({ githubId, targetContributionCount }) => {
   contributions.getContributionsSummary(githubId)
     .then((commits) => {
-      if (!commits) {
+      if (commits === undefined || commits === null) {
         document.getElementById('day-value').textContent = '';
         document.getElementById('week-value').textContent = '';
         document.getElementById('month-value').textContent = '';
@@ -65,7 +65,8 @@ const SHOW_MAIN_VIEW = () => {
   document.getElementById('mainView').style.display = 'block';
   document.getElementById('formView').style.display = 'none';
 
-  if (store.load()) {
+  const data = store.load();
+  if (data !== undefined && data !== null) {
     document.getElementById('description-configured').style.display = 'block';
     document.getElementById('description-unconfigured').style.display = 'none';
   } else {
@@ -82,7 +83,7 @@ const SHOW_FORM_VIEW = () => {
 };
 const UPDATE_MAIN_VIEW = () => {
   const data = store.load();
-  if (data) {
+  if (data !== undefined && data !== null) {
     const { targetContributionCount, githubId } = data;
     updateContributions({ githubId, targetContributionCount });
     updateAvatar(githubId);
@@ -115,7 +116,7 @@ document.getElementById('formView-cancel').addEventListener('click', () => {
 document.getElementById('user-editBtn').addEventListener('click', () => {
   /* Populate fields if localStorage has our data */
   const data = store.load();
-  if (data) {
+  if (data !== undefined && data !== null) {
     const { targetContributionCount, githubId } = data;
     document.getElementById('formView-id').value = githubId;
     document.getElementById('formView-count').value = targetContributionCount;

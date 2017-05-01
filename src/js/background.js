@@ -17,7 +17,7 @@ let BACKGROUND_WORKER;
 // Defined as non-arrow function so that we can update the Global variables
 function SYNC_USERDATA() {
   const temp = store.load();
-  if (temp) {
+  if (temp !== undefined && temp !== null) {
     const { targetContributionCount, githubId } = temp;
     TARGET_CONTRIBUTION_COUNT = targetContributionCount;
     GITHUB_USERNAME = githubId;
@@ -35,7 +35,7 @@ const UPDATE_BADGE = (githubId, value) => {
   } else {
     contributions.getContributionsOfTheDay(githubId)
       .then((commitCount) => {
-        if (commitCount) {
+        if (commitCount !== undefined && commitCount !== null) {
           chrome.browserAction.setBadgeBackgroundColor({
             color: theme.getColor(Math.round((commitCount / TARGET_CONTRIBUTION_COUNT) * 100))
           });
