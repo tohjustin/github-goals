@@ -137,17 +137,20 @@ const FORMVIEW_SHOW_SPINNER = () => {
   document.getElementById('formView-avatar').style.display = 'none';
   document.getElementById('formView-avatar-spinner').style.display = 'block';
 };
-const FORMVIEW_SHOW_VALID_ICON = () => {
+const FORMVIEW_GITHUBID_VALID = () => {
   document.getElementById('avatar-valid').style.display = 'block';
   document.getElementById('avatar-invalid').style.display = 'none';
+  document.getElementById('formView-submit').disabled = false;
 };
-const FORMVIEW_SHOW_INVALID_ICON = () => {
+const FORMVIEW_GITHUBID_INVALID = () => {
   document.getElementById('avatar-valid').style.display = 'none';
   document.getElementById('avatar-invalid').style.display = 'block';
+  document.getElementById('formView-submit').disabled = true;
 };
 const FORMVIEW_HIDE_ICONS = () => {
   document.getElementById('avatar-valid').style.display = 'none';
   document.getElementById('avatar-invalid').style.display = 'none';
+  document.getElementById('formView-submit').disabled = true;
 };
 
 const GITHUBID_IS_VALID = () => {
@@ -164,13 +167,13 @@ const GITHUBID_IS_VALID = () => {
       /* user exists! */
       document.getElementById('formView-avatar').src = `https://avatars0.githubusercontent.com/${inputGithubId}`;
       FORMVIEW_SHOW_AVATAR();
-      FORMVIEW_SHOW_VALID_ICON();
+      FORMVIEW_GITHUBID_VALID();
     })
     .catch(() => {
       /* user doesn't exist! */
       document.getElementById('formView-avatar').src = '../images/avatar.png';
       FORMVIEW_SHOW_AVATAR();
-      FORMVIEW_SHOW_INVALID_ICON();
+      FORMVIEW_GITHUBID_INVALID();
     });
 };
 
