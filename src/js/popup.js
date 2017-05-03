@@ -1,4 +1,5 @@
 import moment from 'moment';
+import axios from 'axios';
 import _ from 'lodash';
 
 import _msg from './modules/msg';
@@ -125,11 +126,34 @@ const UPDATE_MAIN_VIEW = () => {
   }
 };
 
+const GITHUBID_IS_VALID = () => {
+  const inputGithubId = document.getElementById('formView-id').value;
+  const config = {
+    baseURL: 'https://avatars0.githubusercontent.com/',
+    validateStatus: status => (status === 200)
+  };
+
+  axios.get(`${inputGithubId}`, config)
+    .then(() => {
+      /* user exists! */
+      document.getElementById('formView-avatar').src = `https://avatars0.githubusercontent.com/${inputGithubId}`;
+    })
+    .catch(() => {
+      /* user doesn't exist! */
+      document.getElementById('formView-avatar').src = '../images/avatar.png';
+    });
+};
+
+const DEBOUNCED_GITHUBID_IS_VALID = _.debounce(() => {
+  GITHUBID_IS_VALID();
+}, 1000);
+
 /* --------------------------------------
  ATTACHING EVENT LISTENERS
 -------------------------------------- */
 document.getElementById('user-editBtn').addEventListener('click', () => {
   PREPOPULATE_INPUT_FIELDS();
+  GITHUBID_IS_VALID();
   SHOW_FORM_VIEW();
 });
 
@@ -150,11 +174,9 @@ document.getElementById('formView-submit').addEventListener('click', () => {
   SYNC_BACKGROUND_DATA();
 });
 
-document.getElementById('formView-id').addEventListener('input',
-  _.debounce(() => {
-    console.log('debounced!');
-  }, 1000)
-);
+document.getElementById('formView-id').addEventListener('input', () => {
+  DEBOUNCED_GITHUBID_IS_VALID();
+});
 
 /* --------------------------------------
  START OF APPLICATION
