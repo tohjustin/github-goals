@@ -31,9 +31,16 @@
 .form-idContainer .form-input {
   width: 190px;
 }
-.form-idContainer img {
+.form-idContainer .img {
   height: 55px;
   border-radius: 3px;
+}
+.form-idContainer .avatar {
+  display: none;
+}
+.form-idContainer .loading {
+  height: 51px;
+  border: 2px solid #D8D8D8;
 }
 .form-input:last-child {
   margin-top: 10px;
