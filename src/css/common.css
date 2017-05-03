@@ -38,6 +38,22 @@
 .form-idContainer .avatar {
   display: none;
 }
+.avatar-status {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+.avatar-status img {
+  height: 13px;
+  margin: 0 2.5px 0 5px;
+}
+div .invalid {
+  color: #F40F2B;
+}
+.id-label {
+  display: flex;
+  align-items: center;
+}
 .form-idContainer .loading {
   height: 51px;
   border: 2px solid #D8D8D8;
