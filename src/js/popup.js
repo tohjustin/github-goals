@@ -1,4 +1,6 @@
 import moment from 'moment';
+import _ from 'lodash';
+
 import _msg from './modules/msg';
 import * as store from './modules/store';
 import * as theme from './modules/theme';
@@ -147,6 +149,12 @@ document.getElementById('formView-submit').addEventListener('click', () => {
   CLEAR_INPUT_FIELDS();
   SYNC_BACKGROUND_DATA();
 });
+
+document.getElementById('formView-id').addEventListener('input',
+  _.debounce(() => {
+    console.log('debounced!');
+  }, 1000)
+);
 
 /* --------------------------------------
  START OF APPLICATION
