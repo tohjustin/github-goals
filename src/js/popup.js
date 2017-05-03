@@ -126,7 +126,20 @@ const UPDATE_MAIN_VIEW = () => {
   }
 };
 
+/* --------------------------------------
+ GITHUB ID CHECKING FUNCTIONS
+-------------------------------------- */
+const FORMVIEW_SHOW_AVATAR = () => {
+  document.getElementById('formView-avatar').style.display = 'block';
+  document.getElementById('formView-avatar-spinner').style.display = 'none';
+};
+const FORMVIEW_SHOW_SPINNER = () => {
+  document.getElementById('formView-avatar').style.display = 'none';
+  document.getElementById('formView-avatar-spinner').style.display = 'block';
+};
+
 const GITHUBID_IS_VALID = () => {
+  FORMVIEW_SHOW_SPINNER();
   const inputGithubId = document.getElementById('formView-id').value;
   const config = {
     baseURL: 'https://avatars0.githubusercontent.com/',
@@ -137,10 +150,12 @@ const GITHUBID_IS_VALID = () => {
     .then(() => {
       /* user exists! */
       document.getElementById('formView-avatar').src = `https://avatars0.githubusercontent.com/${inputGithubId}`;
+      FORMVIEW_SHOW_AVATAR();
     })
     .catch(() => {
       /* user doesn't exist! */
       document.getElementById('formView-avatar').src = '../images/avatar.png';
+      FORMVIEW_SHOW_AVATAR();
     });
 };
 
