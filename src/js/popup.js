@@ -155,11 +155,11 @@ const GITHUBID_IS_VALID = () => {
   FORMVIEW_HIDE_ICONS();
   const inputGithubId = document.getElementById('formView-id').value;
   const config = {
-    baseURL: 'https://avatars0.githubusercontent.com/',
+    baseURL: 'https://www.github.com/users',
     validateStatus: status => (status === 200)
   };
 
-  axios.get(`${inputGithubId}`, config)
+  axios.get(`${inputGithubId}/contributions`, config)
     .then(() => {
       /* user exists! */
       document.getElementById('formView-avatar').src = `https://avatars0.githubusercontent.com/${inputGithubId}`;
