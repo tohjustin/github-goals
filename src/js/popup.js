@@ -137,9 +137,22 @@ const FORMVIEW_SHOW_SPINNER = () => {
   document.getElementById('formView-avatar').style.display = 'none';
   document.getElementById('formView-avatar-spinner').style.display = 'block';
 };
+const FORMVIEW_SHOW_VALID_ICON = () => {
+  document.getElementById('avatar-valid').style.display = 'block';
+  document.getElementById('avatar-invalid').style.display = 'none';
+};
+const FORMVIEW_SHOW_INVALID_ICON = () => {
+  document.getElementById('avatar-valid').style.display = 'none';
+  document.getElementById('avatar-invalid').style.display = 'block';
+};
+const FORMVIEW_HIDE_ICONS = () => {
+  document.getElementById('avatar-valid').style.display = 'none';
+  document.getElementById('avatar-invalid').style.display = 'none';
+};
 
 const GITHUBID_IS_VALID = () => {
   FORMVIEW_SHOW_SPINNER();
+  FORMVIEW_HIDE_ICONS();
   const inputGithubId = document.getElementById('formView-id').value;
   const config = {
     baseURL: 'https://avatars0.githubusercontent.com/',
@@ -151,11 +164,13 @@ const GITHUBID_IS_VALID = () => {
       /* user exists! */
       document.getElementById('formView-avatar').src = `https://avatars0.githubusercontent.com/${inputGithubId}`;
       FORMVIEW_SHOW_AVATAR();
+      FORMVIEW_SHOW_VALID_ICON();
     })
     .catch(() => {
       /* user doesn't exist! */
       document.getElementById('formView-avatar').src = '../images/avatar.png';
       FORMVIEW_SHOW_AVATAR();
+      FORMVIEW_SHOW_INVALID_ICON();
     });
 };
 
