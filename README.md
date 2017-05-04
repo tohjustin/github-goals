@@ -1,7 +1,7 @@
 <p align="center">
-  <img height="192px" src="https://github.com/tohjustin/github-goals/blob/master/readme/extension_logo.png">
+  <a href="https://chrome.google.com/webstore/detail/github-goals/pchnbdedipdodklgoojebccbjkeoaakd" target="_blank"><img height="192px" src="https://github.com/tohjustin/github-goals/blob/master/readme/extension_logo.png"></a>
   <br>
-  <img height="50" src="https://github.com/tohjustin/github-goals/blob/master/readme/extension_name.png">
+  <a href="https://chrome.google.com/webstore/detail/github-goals/pchnbdedipdodklgoojebccbjkeoaakd" target="_blank"><img height="50" src="https://github.com/tohjustin/github-goals/blob/master/readme/extension_name.png"></a>
 </p>
 <p align="center">
   <span>
