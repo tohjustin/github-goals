@@ -13,7 +13,8 @@
   "permissions": [
     "*://*.github.com/users/*"
   ],
-  "name": "<%= package.name %>",
+  "name": "Github Goals",
+  "short_name": "Github Goals",
   "version": "<%= package.version %>",
   "description": "<%= package.description %>"
 }

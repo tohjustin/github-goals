@@ -1,7 +1,7 @@
 {
   "name": "github-goals",
   "version": "1.0.0",
-  "description": "A chrome extension to show user Github commit count for the day",
+  "description": "A chrome extension to track your Github contributions!",
   "keywords": [
     "github",
     "commits",
