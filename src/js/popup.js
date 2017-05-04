@@ -137,25 +137,28 @@ const FORMVIEW_SHOW_SPINNER = () => {
   document.getElementById('formView-avatar').style.display = 'none';
   document.getElementById('formView-avatar-spinner').style.display = 'block';
 };
-const FORMVIEW_GITHUBID_VALID = () => {
+const FORMVIEW_SHOW_VALID_ICON = () => {
   document.getElementById('avatar-valid').style.display = 'block';
   document.getElementById('avatar-invalid').style.display = 'none';
-  document.getElementById('formView-submit').disabled = false;
 };
-const FORMVIEW_GITHUBID_INVALID = () => {
+const FORMVIEW_SHOW_INVALID_ICON = () => {
   document.getElementById('avatar-valid').style.display = 'none';
   document.getElementById('avatar-invalid').style.display = 'block';
-  document.getElementById('formView-submit').disabled = true;
 };
 const FORMVIEW_HIDE_ICONS = () => {
   document.getElementById('avatar-valid').style.display = 'none';
   document.getElementById('avatar-invalid').style.display = 'none';
+};
+const FORMVIEW_ENABLE_SUBMIT_BTN = () => {
+  document.getElementById('formView-submit').disabled = false;
+};
+const FORMVIEW_DISABLE_SUBMIT_BTN = () => {
   document.getElementById('formView-submit').disabled = true;
 };
 
-const GITHUBID_IS_VALID = () => {
-  FORMVIEW_SHOW_SPINNER();
+const IS_GITHUBID_VALID = () => {
   FORMVIEW_HIDE_ICONS();
+  FORMVIEW_SHOW_SPINNER();
   const inputGithubId = document.getElementById('formView-id').value;
   const config = {
     baseURL: 'https://www.github.com/users',
@@ -167,18 +170,20 @@ const GITHUBID_IS_VALID = () => {
       /* user exists! */
       document.getElementById('formView-avatar').src = `https://avatars0.githubusercontent.com/${inputGithubId}`;
       FORMVIEW_SHOW_AVATAR();
-      FORMVIEW_GITHUBID_VALID();
+      FORMVIEW_SHOW_VALID_ICON();
+      FORMVIEW_ENABLE_SUBMIT_BTN();
     })
     .catch(() => {
       /* user doesn't exist! */
       document.getElementById('formView-avatar').src = '../images/avatar.png';
       FORMVIEW_SHOW_AVATAR();
-      FORMVIEW_GITHUBID_INVALID();
+      FORMVIEW_SHOW_INVALID_ICON();
+      FORMVIEW_DISABLE_SUBMIT_BTN();
     });
 };
 
 const DEBOUNCED_GITHUBID_IS_VALID = _.debounce(() => {
-  GITHUBID_IS_VALID();
+  IS_GITHUBID_VALID();
 }, 1000);
 
 /* --------------------------------------
@@ -186,12 +191,20 @@ const DEBOUNCED_GITHUBID_IS_VALID = _.debounce(() => {
 -------------------------------------- */
 document.getElementById('user-editBtn').addEventListener('click', () => {
   PREPOPULATE_INPUT_FIELDS();
-  GITHUBID_IS_VALID();
+  IS_GITHUBID_VALID();
   SHOW_FORM_VIEW();
 });
 
 document.getElementById('user-configureBtn').addEventListener('click', () => {
+  document.getElementById('formView-avatar').src = '../images/avatar.png';
+  FORMVIEW_SHOW_AVATAR();
+  FORMVIEW_HIDE_ICONS();
+  FORMVIEW_DISABLE_SUBMIT_BTN();
   SHOW_FORM_VIEW();
+});
+
+document.getElementById('formView-id').addEventListener('input', () => {
+  DEBOUNCED_GITHUBID_IS_VALID();
 });
 
 document.getElementById('formView-cancel').addEventListener('click', () => {
@@ -205,10 +218,6 @@ document.getElementById('formView-submit').addEventListener('click', () => {
   SHOW_MAIN_VIEW();
   CLEAR_INPUT_FIELDS();
   SYNC_BACKGROUND_DATA();
-});
-
-document.getElementById('formView-id').addEventListener('input', () => {
-  DEBOUNCED_GITHUBID_IS_VALID();
 });
 
 /* --------------------------------------
