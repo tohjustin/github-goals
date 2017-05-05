@@ -1,7 +1,6 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
 import moment from 'moment';
-import * as store from './store';
 
 export const getAllContributions = username =>
   new Promise((resolve, reject) => {
@@ -27,7 +26,6 @@ export const getAllContributions = username =>
         resolve(contributionData);
       })
       .catch((error) => {
-        store.reset();
         reject(error);
       });
   });
