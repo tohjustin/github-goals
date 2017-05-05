@@ -227,3 +227,4 @@ document.getElementById('formView-submit').addEventListener('click', () => {
 UPDATE_MONTH_LABEL();
 UPDATE_MAIN_VIEW();
 SHOW_MAIN_VIEW();
+SYNC_BACKGROUND_DATA();
