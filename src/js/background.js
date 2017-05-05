@@ -53,7 +53,10 @@ function SYNC_USERDATA() {
 /* scrap & update commit count periodically + configure it to repeat it periodically */
 function INIT_WORKER(githubId, updateInterval) {
   clearInterval(BACKGROUND_WORKER);
-  BACKGROUND_WORKER = setInterval(() => { SCRAPE_AND_UPDATE_BADGE(githubId); }, updateInterval);
+  BACKGROUND_WORKER = setInterval(() => {
+    SYNC_USERDATA();
+    SCRAPE_AND_UPDATE_BADGE(githubId);
+  }, updateInterval);
 }
 
 /* --------------------------------------
