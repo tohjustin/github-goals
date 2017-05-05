@@ -10,7 +10,9 @@
 </p>
 
 ## Extension Preview
-<img src="./readme/preview.gif">
+<p align="center">
+  <img src="./readme/preview.gif">
+</p>
 
 ## Prerequisites
 
