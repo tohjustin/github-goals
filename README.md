@@ -1,7 +1,7 @@
 <p align="center">
-  <a href="https://chrome.google.com/webstore/detail/github-goals/pchnbdedipdodklgoojebccbjkeoaakd" target="_blank"><img height="192px" src="https://github.com/tohjustin/github-goals/blob/master/readme/extension_logo.png"></a>
+  <a href="https://chrome.google.com/webstore/detail/github-goals/pchnbdedipdodklgoojebccbjkeoaakd" target="_blank"><img height="192px" src="./readme/extension_logo.png"></a>
   <br>
-  <a href="https://chrome.google.com/webstore/detail/github-goals/pchnbdedipdodklgoojebccbjkeoaakd" target="_blank"><img height="50" src="https://github.com/tohjustin/github-goals/blob/master/readme/extension_name.png"></a>
+  <a href="https://chrome.google.com/webstore/detail/github-goals/pchnbdedipdodklgoojebccbjkeoaakd" target="_blank"><img height="50" src="./readme/extension_name.png"></a>
 </p>
 <p align="center">
   <span>
@@ -10,7 +10,7 @@
 </p>
 
 ## Extension Preview
-<img src="https://github.com/tohjustin/github-goals/blob/master/readme/preview.gif">
+<img src="./readme/preview.gif">
 
 ## Prerequisites
 
@@ -28,8 +28,11 @@ yarn
 ## Getting Started
 
 ``` bash
-# bundle js files (eg. background.js, popup.js) into '/dist'
+# bundle files for development (target '/dist/dev' directory when loading the unpacked extension)
 yarn run start
+
+# bundle files for production (make sure you have generated a private key 'mykey.pem' beforehand)
+yarn run build
 ```
 
 ## License
