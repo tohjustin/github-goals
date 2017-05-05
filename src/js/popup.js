@@ -159,6 +159,7 @@ const FORMVIEW_DISABLE_SUBMIT_BTN = () => {
 const IS_GITHUBID_VALID = () => {
   FORMVIEW_HIDE_ICONS();
   FORMVIEW_SHOW_SPINNER();
+  FORMVIEW_DISABLE_SUBMIT_BTN();
   const inputGithubId = document.getElementById('formView-id').value;
   const config = {
     baseURL: 'https://www.github.com/users',
