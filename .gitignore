@@ -2,9 +2,7 @@
 mykey.pem
 node_modules
 npm-debug.log
-build/*.crx
-build/dev
-build/prod
+build
 build/updates.xml
 chromestore_assets
 .tmp
