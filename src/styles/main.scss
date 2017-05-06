@@ -1,9 +1,11 @@
+@import "base/variables";
+
 .body {
   font-family: 'Quicksand', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: normal;
-  color: #333;
+  color: $color-font-black;
   width: 300px;
   height: 200px;
   margin: 0;
@@ -56,7 +58,7 @@
 }
 
 div .invalid {
-  color: #f40f2b;
+  color: $color-icon-invalid;
 }
 
 .id-label {
@@ -66,7 +68,7 @@ div .invalid {
 
 .form-idContainer .loading {
   height: 51px;
-  border: 2px solid #d8d8d8;
+  border: 2px solid $color-border;
 }
 
 .form-input:last-child {
@@ -83,7 +85,7 @@ div .invalid {
   width: -o-calc(100% - 8px);
   width: calc(100% - 8px);
   margin-top: 6px;
-  border: 1px solid #d8d8d8;
+  border: 1px solid $color-border;
   border-radius: 5px;
   padding-left: 6px;
   padding-top: 5px;
@@ -93,7 +95,7 @@ div .invalid {
 }
 
 .form input:focus {
-  border: 2px solid #0366d6;
+  border: 2px solid $color-border-focus;
   outline: none;
 }
 
@@ -120,30 +122,30 @@ div .invalid {
 }
 
 .btn-primary {
-  background-color: #0366d6;
-  color: white;
+  background-color: $color-primary;
+  color: $color-font-white;
 }
 
 .btn-primary:hover {
-  background-color: #0c80db;
+  background-color: $color-primary-shade-1;
 }
 
 .btn-primary:disabled,
 .btn-primary[disabled],
 .btn-primary:disabled:hover,
 .btn-primary[disabled]:hover {
-  background-color: rgba(3, 102, 214, 0.5);
+  background-color: $color-primary-shade-2;
   cursor: default;
 }
 
 .btn-secondary {
-  color: #333;
-  background-color: #d8d8d8;
+  color: $color-font-black;
+  background-color: $color-secondary;
   margin-right: 10px;
 }
 
 .btn-secondary:hover {
-  background-color: #eee;
+  background-color: $color-secondary-shade-1;
 }
 
 #mainView {
@@ -196,7 +198,7 @@ div .invalid {
 .userInfo .description a:link,
 .userInfo .description a:visited,
 .userInfo .description a:focus {
-  color: #0366d6;
+  color: $color-primary;
   text-decoration: none;
   outline: none;
   font-size: 20px;
@@ -253,7 +255,7 @@ div .invalid {
   -o-border-radius: 8px;
   border-radius: 8px;
   position: relative;
-  background: #d8d8d8;
+  background: $color-progessbar-background;
 }
 
 .progressBar > span {
