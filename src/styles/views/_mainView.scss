@@ -1,0 +1,43 @@
+#mainView {
+  display: none;
+  height: 100%;
+}
+
+.main {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  margin: 15px 0;
+
+  > span {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .title {
+    font-size: 14px;
+    font-weight: bold;
+    width: 50%;
+  }
+
+  .value {
+    font-size: 14px;
+    text-align: right;
+    width: 47.5%;
+  }
+}
+
+.section:first-child {
+  margin-top: 0;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}

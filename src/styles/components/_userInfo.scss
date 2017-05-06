@@ -1,0 +1,57 @@
+#user-configureBtn {
+  outline: 0;
+}
+
+.userInfo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 15px;
+  height: 50px;
+
+  .avatar {
+    height: 100%;
+    border-radius: 3px;
+  }
+
+  .editIcon {
+    height: 15px;
+    margin-left: 2px;
+    cursor: pointer;
+  }
+
+  .editIcon:hover {
+    filter: brightness(50%);
+  }
+
+  .description {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 15px;
+
+    a {
+      color: $color-primary;
+      text-decoration: none;
+      outline: none;
+      font-size: 20px;
+
+      :link,
+      :visited,
+      :focus {
+        color: $color-primary;
+        text-decoration: none;
+        outline: none;
+        font-size: 20px;
+      }
+
+      :hover,
+      :active {
+        text-decoration: underline;
+      }
+    }
+
+    div {
+      margin-top: 3px;
+    }
+  }
+}

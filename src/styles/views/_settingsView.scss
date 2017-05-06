@@ -1,0 +1,93 @@
+#formView {
+  display: none;
+  height: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 20px;
+  height: inherit;
+
+  input {
+    width: -moz-calc(100% - 8px);
+    width: -webkit-calc(100% - 8px);
+    width: -o-calc(100% - 8px);
+    width: calc(100% - 8px);
+    margin-top: 6px;
+    border: 1px solid $color-border;
+    border-radius: 5px;
+    padding-left: 6px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 14px;
+    font-family: 'Quicksand', sans-serif;
+
+    :focus {
+      border: 2px solid $color-border-focus;
+      outline: none;
+    }
+  }
+}
+
+.form-idContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .avatar {
+    display: none;
+  }
+
+  .form-input {
+    width: 190px;
+  }
+
+  .img {
+    height: 55px;
+    border-radius: 3px;
+  }
+
+  .loading {
+    height: 51px;
+    border: 2px solid $color-border;
+  }
+}
+
+.avatar-status {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+
+  img {
+    height: 13px;
+    margin: 0 2.5px 0 5px;
+  }
+}
+
+div .invalid {
+  color: $color-icon-invalid;
+}
+
+.id-label {
+  display: flex;
+  align-items: center;
+}
+
+.form-input:last-child {
+  margin-top: 10px;
+}
+
+.label {
+  padding-left: 5px;
+}
+
+.form-btn {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}

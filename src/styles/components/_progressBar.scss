@@ -1,0 +1,16 @@
+.progressBar {
+  background: $color-progessbar-background;
+  border-radius: 8px;
+  height: 8px;
+  position: relative;
+
+  > span {
+    border-radius: 8px;
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    transition: width 1s ease-in-out;
+    width: 0;
+  }
+}

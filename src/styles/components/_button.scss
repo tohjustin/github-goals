@@ -1,0 +1,40 @@
+.btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 3px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 35px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: $color-primary;
+  color: $color-font-white;
+
+  :hover {
+    background-color: $color-primary-shade-1;
+  }
+}
+
+.btn-primary:disabled,
+.btn-primary:disabled:hover {
+  background-color: $color-primary-shade-2;
+  cursor: default;
+}
+
+.btn-secondary {
+  color: $color-font-black;
+  background-color: $color-secondary;
+  margin-right: 10px;
+
+  :hover {
+    background-color: $color-secondary-shade-1;
+  }
+}
