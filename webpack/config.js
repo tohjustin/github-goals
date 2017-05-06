@@ -16,6 +16,16 @@ module.exports = {
       test: /\.js$/,
       loaders: ['babel-loader'],
       include: path.resolve(__dirname, '../src/js')
+    },
+    {
+      test: /\.scss$/,
+      use: [{
+        loader: 'style-loader'
+      }, {
+        loader: 'css-loader'
+      }, {
+        loader: 'sass-loader'
+      }]
     }]
   }
 };

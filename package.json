@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "rm -rf ./build/prod && mkdir -p ./build/prod && webpack --config ./webpack/webpack.config.prod.js",
-    "start": "rm -rf ./build/dev && mkdir -p ./build/dev && webpack --config ./webpack/webpack.config.dev.js",
+    "dev": "rm -rf ./build/dev && mkdir -p ./build/dev && webpack --config ./webpack/webpack.config.dev.js",
     "lint": "eslint src/js/",
     "test": "mocha-webpack --watch --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\"",
     "test:ci": "mocha-webpack --webpack-config ./webpack/webpack.config.test.js \"src/js/**/*.spec.js\""
@@ -45,7 +45,10 @@
     "eventemitter2": "0.4.14",
     "mocha": "^3.3.0",
     "mocha-webpack": "0.7.0",
+    "node-sass": "^4.5.2",
+    "sass-loader": "^6.0.3",
     "sinon": "1.12.2",
+    "style-loader": "^0.17.0",
     "stylelint-config-standard": "^16.0.0",
     "webpack": "2.2.1",
     "webpack-dev-server": "1.16.2",
