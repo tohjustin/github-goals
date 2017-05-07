@@ -1,4 +1,4 @@
-export const getColor = (percentage) => {
+export const convertPercentageToColor = (percentage) => {
   if (percentage < 50) {
     return '#F40F2B';
   } else if (percentage < 100) {

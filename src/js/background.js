@@ -1,7 +1,7 @@
-import _msg from 'modules/msg';
-import * as contributions from 'modules/git-contribution';
+import chromeMessaging from 'modules/chromeMessaging';
+import * as githubScraper from 'modules/githubScraper';
 import * as store from 'modules/store';
-import * as theme from 'modules/theme';
+import { convertPercentageToColor } from 'modules/utils';
 
 /* --------------------------------------
  GLOBAL CONSTANTS & VARS (bad practice T_T)
@@ -22,22 +22,23 @@ const SET_BADGE = ({ color, text }) => {
 
 const SCRAPE_AND_UPDATE_BADGE = (githubId) => {
   if (githubId === undefined) {
-    SET_BADGE({ color: theme.getColor(0), text: '?' });
+    SET_BADGE({ color: convertPercentageToColor(0), text: '?' });
     return;
   }
 
-  contributions.getContributionsOfTheDay(githubId)
+  githubScraper.getContributionsOfTheDay(githubId)
     .then((commitCount) => {
       if (commitCount > -1) {
-        const color = theme.getColor(Math.round((commitCount / TARGET_CONTRIBUTION_COUNT) * 100));
+        const percentage = Math.round((commitCount / TARGET_CONTRIBUTION_COUNT) * 100);
+        const color = convertPercentageToColor(percentage);
         const text = commitCount.toString();
         SET_BADGE({ color, text });
       } else {
-        SET_BADGE({ color: theme.getColor(0), text: '?' });
+        SET_BADGE({ color: convertPercentageToColor(0), text: '?' });
       }
     })
     .catch(() => {
-      console.log('[UPDATE_BADGE, contributions.getContributionsOfTheDay] ERROR!');
+      console.log('[UPDATE_BADGE, githubScraper.getContributionsOfTheDay] ERROR!');
     });
 };
 
@@ -63,7 +64,7 @@ function INIT_WORKER(githubId, updateInterval) {
  START OF APPLICATION
 -------------------------------------- */
 /* initialize message-passing module to listen for popup events */
-_msg.init('bg', {
+chromeMessaging.init('bg', {
   syncData: () => {
     SYNC_USERDATA();
     SCRAPE_AND_UPDATE_BADGE(GITHUB_USERNAME);

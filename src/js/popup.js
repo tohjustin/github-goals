@@ -3,12 +3,12 @@ import axios from 'axios';
 import _ from 'lodash';
 
 import 'styles/main.scss';
-import _msg from 'modules/msg';
+import chromeMessaging from 'modules/chromeMessaging';
+import * as githubScraper from 'modules/githubScraper';
 import * as store from 'modules/store';
-import * as theme from 'modules/theme';
-import * as contributions from 'modules/git-contribution';
+import { convertPercentageToColor } from 'modules/utils';
 
-const msg = _msg.init('popup');
+const msg = chromeMessaging.init('popup');
 
 /* --------------------------------------
  MAIN UI HANDLING FUNCTIONS
@@ -18,12 +18,12 @@ const COMPUTE_STYLE = (count, totalCount) => {
   const text = `${count}/${totalCount} commits`;
   const percentage = Math.round((count / totalCount) * 100);
   const width = `${(percentage > 100) ? 100 : percentage}%`;
-  const color = theme.getColor(percentage);
+  const color = convertPercentageToColor(percentage);
   return { color, text, width };
 };
 
 const UPDATE_CONTRIBUTIONS = ({ githubId, targetContributionCount }) => {
-  contributions.getContributionsSummary(githubId)
+  githubScraper.getContributionsSummary(githubId)
     .then((commits) => {
       /* update daily progess bar */
       let computedStyle = COMPUTE_STYLE(commits.dayCount, targetContributionCount * 1);
