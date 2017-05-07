@@ -1,8 +1,9 @@
+import 'styles/main.scss';
+
 import moment from 'moment';
 import axios from 'axios';
 import _ from 'lodash';
 
-import 'styles/main.scss';
 import chromeMessaging from 'modules/chromeMessaging';
 import * as githubScraper from 'modules/githubScraper';
 import * as store from 'modules/store';
@@ -188,44 +189,46 @@ const DEBOUNCED_GITHUBID_IS_VALID = _.debounce(() => {
   IS_GITHUBID_VALID();
 }, 1000);
 
-/* --------------------------------------
- ATTACHING EVENT LISTENERS
--------------------------------------- */
-document.getElementById('user-editBtn').addEventListener('click', () => {
-  PREPOPULATE_INPUT_FIELDS();
-  IS_GITHUBID_VALID();
-  SHOW_FORM_VIEW();
-});
+window.onload = () => {
+  /* --------------------------------------
+   ATTACHING EVENT LISTENERS
+  -------------------------------------- */
+  document.getElementById('user-editBtn').addEventListener('click', () => {
+    PREPOPULATE_INPUT_FIELDS();
+    IS_GITHUBID_VALID();
+    SHOW_FORM_VIEW();
+  });
 
-document.getElementById('user-configureBtn').addEventListener('click', () => {
-  document.getElementById('formView-avatar').src = '../images/avatar.png';
-  FORMVIEW_SHOW_AVATAR();
-  FORMVIEW_HIDE_ICONS();
-  FORMVIEW_DISABLE_SUBMIT_BTN();
-  SHOW_FORM_VIEW();
-});
+  document.getElementById('user-configureBtn').addEventListener('click', () => {
+    document.getElementById('formView-avatar').src = '../images/avatar.png';
+    FORMVIEW_SHOW_AVATAR();
+    FORMVIEW_HIDE_ICONS();
+    FORMVIEW_DISABLE_SUBMIT_BTN();
+    SHOW_FORM_VIEW();
+  });
 
-document.getElementById('formView-id').addEventListener('input', () => {
-  DEBOUNCED_GITHUBID_IS_VALID();
-});
+  document.getElementById('formView-id').addEventListener('input', () => {
+    DEBOUNCED_GITHUBID_IS_VALID();
+  });
 
-document.getElementById('formView-cancel').addEventListener('click', () => {
+  document.getElementById('formView-cancel').addEventListener('click', () => {
+    SHOW_MAIN_VIEW();
+    CLEAR_INPUT_FIELDS();
+  });
+
+  document.getElementById('formView-submit').addEventListener('click', () => {
+    SAVE_DATA();
+    UPDATE_MAIN_VIEW();
+    SHOW_MAIN_VIEW();
+    CLEAR_INPUT_FIELDS();
+    SYNC_BACKGROUND_DATA();
+  });
+
+  /* --------------------------------------
+   START OF APPLICATION
+  -------------------------------------- */
+  UPDATE_MONTH_LABEL();
   SHOW_MAIN_VIEW();
-  CLEAR_INPUT_FIELDS();
-});
-
-document.getElementById('formView-submit').addEventListener('click', () => {
-  SAVE_DATA();
   UPDATE_MAIN_VIEW();
-  SHOW_MAIN_VIEW();
-  CLEAR_INPUT_FIELDS();
   SYNC_BACKGROUND_DATA();
-});
-
-/* --------------------------------------
- START OF APPLICATION
--------------------------------------- */
-UPDATE_MONTH_LABEL();
-UPDATE_MAIN_VIEW();
-SHOW_MAIN_VIEW();
-SYNC_BACKGROUND_DATA();
+};
