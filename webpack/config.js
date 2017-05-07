@@ -9,7 +9,12 @@ module.exports = {
     filename: './js/[name].js'
   },
   resolve: {
-    modules: [path.join(__dirname, 'src'), 'node_modules']
+    modules: [
+      __dirname,
+      'src',
+      'src/js',
+      'node_modules'
+    ]
   },
   module: {
     rules: [{
@@ -25,7 +30,8 @@ module.exports = {
         loader: 'css-loader'
       }, {
         loader: 'sass-loader'
-      }]
+      }],
+      include: path.resolve(__dirname, '../src/styles')
     }]
   }
 };

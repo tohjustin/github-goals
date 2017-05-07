@@ -1,7 +1,7 @@
-import _msg from './modules/msg';
-import * as contributions from './modules/git-contribution';
-import * as store from './modules/store';
-import * as theme from './modules/theme';
+import _msg from 'modules/msg';
+import * as contributions from 'modules/git-contribution';
+import * as store from 'modules/store';
+import * as theme from 'modules/theme';
 
 /* --------------------------------------
  GLOBAL CONSTANTS & VARS (bad practice T_T)

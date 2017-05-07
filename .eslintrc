@@ -22,7 +22,10 @@
   },
   "settings": {
     "import/resolver": {
-      "babel-module": {}
+      "babel-module": {},
+      "webpack": {
+        "config": 'webpack/config.js'
+      }
     }
   },
   "plugins": [

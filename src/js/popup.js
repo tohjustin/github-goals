@@ -2,11 +2,11 @@ import moment from 'moment';
 import axios from 'axios';
 import _ from 'lodash';
 
-import '../styles/main.scss';
-import _msg from './modules/msg';
-import * as store from './modules/store';
-import * as theme from './modules/theme';
-import * as contributions from './modules/git-contribution';
+import 'styles/main.scss';
+import _msg from 'modules/msg';
+import * as store from 'modules/store';
+import * as theme from 'modules/theme';
+import * as contributions from 'modules/git-contribution';
 
 const msg = _msg.init('popup');
 
