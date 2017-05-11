@@ -9,7 +9,7 @@
   flex-direction: column;
 }
 
-.section {
+.contribution {
   margin: 15px 0;
 
   > span {
@@ -21,23 +21,23 @@
     margin-right: 5px;
   }
 
-  .title {
+  @at-root #{&}__title {
     font-size: 14px;
     font-weight: bold;
     width: 50%;
   }
 
-  .value {
+  @at-root #{&}__value {
     font-size: 14px;
     text-align: right;
     width: 47.5%;
   }
-}
 
-.section:first-child {
-  margin-top: 0;
-}
+  @at-root #{&}:first-child {
+    margin-top: 0;
+  }
 
-.section:last-child {
-  margin-bottom: 0;
+  @at-root #{&}:last-child {
+    margin-bottom: 0;
+  }
 }
