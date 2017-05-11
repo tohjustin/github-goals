@@ -28,9 +28,9 @@ const UPDATE_CONTRIBUTIONS = ({ githubId, targetContributionCount }) => {
     .then((commits) => {
       /* update daily progess bar */
       let computedStyle = COMPUTE_STYLE(commits.dayCount, targetContributionCount * 1);
-      document.getElementById('day-value').textContent = computedStyle.text;
-      document.getElementById('day-progessBar').style.width = computedStyle.width;
-      document.getElementById('day-progessBar').style.backgroundColor = computedStyle.color;
+      document.getElementById('contribution-value-day').textContent = computedStyle.text;
+      document.getElementById('progessBar-day').style.width = computedStyle.width;
+      document.getElementById('progessBar-day').style.backgroundColor = computedStyle.color;
 
       /* request background page to update the badge */
       msg.bg('updateBadgeText', undefined, {
@@ -40,16 +40,16 @@ const UPDATE_CONTRIBUTIONS = ({ githubId, targetContributionCount }) => {
 
       /* update weekly progess bar */
       computedStyle = COMPUTE_STYLE(commits.weekCount, targetContributionCount * 7);
-      document.getElementById('week-value').textContent = computedStyle.text;
-      document.getElementById('week-progessBar').style.width = computedStyle.width;
-      document.getElementById('week-progessBar').style.backgroundColor = computedStyle.color;
+      document.getElementById('contribution-value-week').textContent = computedStyle.text;
+      document.getElementById('progessBar-week').style.width = computedStyle.width;
+      document.getElementById('progessBar-week').style.backgroundColor = computedStyle.color;
 
       /* update monthly progess bar */
       computedStyle = COMPUTE_STYLE(commits.monthCount,
         targetContributionCount * moment().daysInMonth());
-      document.getElementById('month-value').textContent = computedStyle.text;
-      document.getElementById('month-progessBar').style.width = computedStyle.width;
-      document.getElementById('month-progessBar').style.backgroundColor = computedStyle.color;
+      document.getElementById('contribution-value-month').textContent = computedStyle.text;
+      document.getElementById('progessBar-month').style.width = computedStyle.width;
+      document.getElementById('progessBar-month').style.backgroundColor = computedStyle.color;
     });
 };
 
@@ -61,7 +61,7 @@ const UPDATE_AVATAR = (githubId) => {
 };
 
 const UPDATE_MONTH_LABEL = () => {
-  document.getElementById('month-name').textContent = `Month of ${moment().format('MMMM')}`;
+  document.getElementById('contribution-title-month').textContent = `Month of ${moment().format('MMMM')}`;
 };
 
 /* --------------------------------------
