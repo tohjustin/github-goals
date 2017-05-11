@@ -55,9 +55,9 @@ const UPDATE_CONTRIBUTIONS = ({ githubId, targetContributionCount }) => {
 
 /* update avatar image, userId & link to github profile page */
 const UPDATE_AVATAR = (githubId) => {
-  document.getElementById('user-link').href = `https://www.github.com/${githubId}`;
-  document.getElementById('user-link').textContent = `${githubId}'s`;
-  document.getElementById('user-avatar').src = `https://avatars0.githubusercontent.com/${githubId}`;
+  document.getElementById('userPanel-link').href = `https://www.github.com/${githubId}`;
+  document.getElementById('userPanel-link').textContent = `${githubId}'s`;
+  document.getElementById('userPanel-avatar').src = `https://avatars0.githubusercontent.com/${githubId}`;
 };
 
 const UPDATE_MONTH_LABEL = () => {
@@ -101,13 +101,14 @@ const SHOW_MAIN_VIEW = () => {
   document.getElementById('mainView').style.display = 'block';
   document.getElementById('formView').style.display = 'none';
 
+  // Check if we have user's has a config stored locally
   const data = store.load();
   if (data) {
-    document.getElementById('description-configured').style.display = 'block';
-    document.getElementById('description-unconfigured').style.display = 'none';
+    document.getElementById('userPanel-info').style.display = 'block';
+    document.getElementById('userPanel-configureBtn').style.display = 'none';
   } else {
-    document.getElementById('description-configured').style.display = 'none';
-    document.getElementById('description-unconfigured').style.display = 'block';
+    document.getElementById('userPanel-info').style.display = 'none';
+    document.getElementById('userPanel-configureBtn').style.display = 'block';
   }
 };
 
@@ -193,13 +194,13 @@ window.onload = () => {
   /* --------------------------------------
    ATTACHING EVENT LISTENERS
   -------------------------------------- */
-  document.getElementById('user-editBtn').addEventListener('click', () => {
+  document.getElementById('userPanel-editBtn').addEventListener('click', () => {
     PREPOPULATE_INPUT_FIELDS();
     IS_GITHUBID_VALID();
     SHOW_FORM_VIEW();
   });
 
-  document.getElementById('user-configureBtn').addEventListener('click', () => {
+  document.getElementById('userPanel-configureBtn').addEventListener('click', () => {
     document.getElementById('formView-avatar').src = '../images/avatar.png';
     FORMVIEW_SHOW_AVATAR();
     FORMVIEW_HIDE_ICONS();
