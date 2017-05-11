@@ -40,47 +40,43 @@
         </div>
       </div>
     </div>
-    <div id="mainView">
-      <div class="main">
-        <div class="userInfo">
-          <img id="user-avatar" class="avatar" src="../images/avatar.png"/>
-          <div id="description-configured" class="description">
-            <a id="user-link" href="https://www.github.com/" target="_blank"></a>
-            <img id="user-editBtn" class="editIcon" src="../images/editIcon.png"/>
-            <div>Contribution Summary</div>
-          </div>
-          <div id="description-unconfigured" class="description" style="height: inherit;">
-            <button id="user-configureBtn" class="btn btn-primary" style="height: 100%; width: 195px;">Configure Github ID</button>
-          </div>
+    <div id="mainView" class="mainView">
+      <div class="userPanel">
+        <img id="userPanel-avatar" class="userPanel__avatar" src="../images/avatar.png"/>
+        <div id="userPanel-info" class="userPanel__info">
+          <span>
+            <a id="userPanel-link" href="https://www.github.com/" target="_blank"></a>
+            <img id="userPanel-editBtn" class="userPanel__editBtn" src="../images/editIcon.png"/>
+          </span>
+          <div class="userPanel__description">Contribution Summary</div>
         </div>
-        <div class="stats">
-          <div class="contribution">
-            <span>
-              <div class="contribution__title">Today</div>
-              <div id="contribution-value-day" class="contribution__value"></div>
-            </span>
-            <div class="progressBar">
-              <span id="progessBar-day"></span>
-            </div>
-          </div>
-          <div class="contribution">
-            <span>
-              <div class="contribution__title">Current Week</div>
-              <div id="contribution-value-week" class="contribution__value"></div>
-            </span>
-            <div class="progressBar">
-              <span id="progessBar-week"></span>
-            </div>
-          </div>
-          <div class="contribution">
-            <span>
-              <div id="contribution-title-month" class="contribution__title">Current Month</div>
-              <div id="contribution-value-month" class="contribution__value"></div>
-            </span>
-            <div class="progressBar">
-              <span id="progessBar-month"></span>
-            </div>
-          </div>
+        <button id="userPanel-configureBtn" class="btn btn-primary userPanel__configureBtn">Configure Github ID</button>
+      </div>
+      <div class="contribution">
+        <span>
+          <div class="contribution__title">Today</div>
+          <div id="contribution-value-day" class="contribution__value"></div>
+        </span>
+        <div class="progressBar">
+          <span id="progessBar-day"></span>
+        </div>
+      </div>
+      <div class="contribution">
+        <span>
+          <div class="contribution__title">Current Week</div>
+          <div id="contribution-value-week" class="contribution__value"></div>
+        </span>
+        <div class="progressBar">
+          <span id="progessBar-week"></span>
+        </div>
+      </div>
+      <div class="contribution">
+        <span>
+          <div id="contribution-title-month" class="contribution__title">Current Month</div>
+          <div id="contribution-value-month" class="contribution__value"></div>
+        </span>
+        <div class="progressBar">
+          <span id="progessBar-month"></span>
         </div>
       </div>
     </div>

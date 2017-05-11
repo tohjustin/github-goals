@@ -1,30 +1,17 @@
-#user-configureBtn {
-  outline: 0;
-}
+$userPanel-height: 50px;
 
-.userInfo {
+.userPanel {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 15px;
-  height: 50px;
+  height: $userPanel-height;
 
-  .avatar {
+  @at-root #{&}__avatar {
     height: 100%;
     border-radius: 3px;
   }
 
-  .editIcon {
-    height: 15px;
-    margin-left: 2px;
-    cursor: pointer;
-  }
-
-  .editIcon:hover {
-    filter: brightness(50%);
-  }
-
-  .description {
+  @at-root #{&}__info {
     font-size: 16px;
     font-weight: bold;
     margin-left: 15px;
@@ -49,9 +36,26 @@
         text-decoration: underline;
       }
     }
+  }
 
-    div {
-      margin-top: 3px;
+  @at-root #{&}__editBtn {
+    height: 15px;
+    margin-left: 2px;
+    cursor: pointer;
+
+    @at-root #{&}:hover {
+      filter: brightness(-50%);
     }
+  }
+
+  @at-root #{&}__description {
+    margin-top: 3px;
+  }
+
+  @at-root #{&}__configureBtn {
+    height: 100%;
+    width: 195px;
+    margin-left: auto; // flush btn to the right
+    line-height: $userPanel-height;
   }
 }

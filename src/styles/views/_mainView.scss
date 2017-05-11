@@ -1,12 +1,12 @@
 #mainView {
   display: none;
-  height: 100%;
 }
 
-.main {
-  margin: 20px;
+.mainView {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  margin: 20px;
 }
 
 .contribution {
