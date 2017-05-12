@@ -14,7 +14,7 @@
   cursor: pointer;
 }
 
-.btn-primary {
+.btn--primary {
   background-color: $color-primary;
   color: $color-font-white;
 
@@ -23,13 +23,13 @@
   }
 }
 
-.btn-primary:disabled,
-.btn-primary:disabled:hover {
+.btn--primary:disabled,
+.btn--primary:disabled:hover {
   background-color: $color-primary-shade-2;
   cursor: default;
 }
 
-.btn-secondary {
+.btn--secondary {
   color: $color-font-black;
   background-color: $color-secondary;
   margin-right: 10px;

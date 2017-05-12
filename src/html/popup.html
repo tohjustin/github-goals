@@ -6,38 +6,35 @@
     <script src="../js/popup.js" type="text/javascript"></script>
   </head>
   <body class="body">
-    <div id="formView">
-      <div class="form">
-        <div class="form-idContainer">
-          <div class="form-input">
-            <div class="id-label">
-              <div class="label">
-                Github ID
-              </div>
-              <div id="avatar-invalid">
-                <div class="avatar-status invalid">
-                  <img src="../images/invalid.png"> ID doesn't exist
-                </div>
-              </div>
-              <div id="avatar-valid">
-                <div class="avatar-status valid">
-                  <img src="../images/valid.png">
-                </div>
-              </div>
-            </div>
-            <input id="formView-id" type="text">
+    <div id="settingsView" class="settingsView">
+      <div class="formField__userId">
+        <div class="formField formField--userId">
+          <div class="formField__description">
+            <span>Github ID</span>
+            <span class="formField__status formField__status--invalid">
+              <img src="../images/invalid.png">
+              <span>ID doesn't exist</span>
+            </span>
+            <span class="formField__status formField__status--valid">
+              <img src="../images/valid.png">
+            </span>
           </div>
-          <img id="formView-avatar" class="img avatar" src="../images/avatar.png">
-          <img id="formView-avatar-spinner" class="img loading" src="../images/avatar-spinner.gif">
+          <input class="formField__input" type="text">
         </div>
-        <div class="form-input">
-          <div class="label">Target amount of daily contributions</div>
-          <input id="formView-count" type="text">
+        <div class="formField__avatar">
+          <img class="formField__avatar" src="../images/avatar.png">
+          <img class="formField__avatar--loading" src="../images/avatar-spinner.gif">
         </div>
-        <div class="form-btn">
-          <button id="formView-cancel" class="btn btn-secondary">Cancel</button>
-          <button id="formView-submit" class="btn btn-primary">Save Settings</button>
+      </div>
+      <div class="formField">
+        <div class="formField__description">
+          <span>Target amount of daily contributions</span>
         </div>
+        <input class="formField__input" type="text">
+      </div>
+      <div class="btnRow">
+        <button class="btn btn--secondary">Cancel</button>
+        <button class="btn btn--primary">Save Settings</button>
       </div>
     </div>
     <div id="mainView" class="mainView">
