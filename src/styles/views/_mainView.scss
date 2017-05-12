@@ -21,23 +21,23 @@
     margin-right: 5px;
   }
 
-  @at-root #{&}__title {
+  &__title {
     font-size: 14px;
     font-weight: bold;
     width: 50%;
   }
 
-  @at-root #{&}__value {
+  &__value {
     font-size: 14px;
     text-align: right;
     width: 47.5%;
   }
 
-  @at-root #{&}:first-child {
+  :first-child {
     margin-top: 0;
   }
 
-  @at-root #{&}:last-child {
+  :last-child {
     margin-bottom: 0;
   }
 }

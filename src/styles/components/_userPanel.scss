@@ -6,12 +6,12 @@ $userPanel-height: 50px;
   align-items: center;
   height: $userPanel-height;
 
-  @at-root #{&}__avatar {
+  &__avatar {
     height: 100%;
     border-radius: 3px;
   }
 
-  @at-root #{&}__info {
+  &__info {
     font-size: 16px;
     font-weight: bold;
     margin-left: 15px;
@@ -22,38 +22,38 @@ $userPanel-height: 50px;
       outline: none;
       font-size: 20px;
 
-      :link,
-      :visited,
-      :focus {
+      &:link,
+      &:visited,
+      &:focus {
         color: $color-primary;
         text-decoration: none;
         outline: none;
         font-size: 20px;
       }
 
-      :hover,
-      :active {
+      &:hover,
+      &:active {
         text-decoration: underline;
       }
     }
   }
 
-  @at-root #{&}__editBtn {
+  &__editBtn {
     height: 15px;
     margin-left: 2px;
     cursor: pointer;
 
-    @at-root #{&}:hover {
-      // filter for $color-primary (navy-blue)
+    &:hover {
+      // filter for $color-primary ()
       filter: contrast(0) sepia(100%) hue-rotate(170deg) brightness(0.7) saturate(5);
     }
   }
 
-  @at-root #{&}__description {
+  &__description {
     margin-top: 3px;
   }
 
-  @at-root #{&}__configureBtn {
+  &__configureBtn {
     height: 100%;
     width: 195px;
     margin-left: auto; // flush btn to the right

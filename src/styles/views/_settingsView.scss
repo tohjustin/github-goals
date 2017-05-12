@@ -17,31 +17,31 @@
 }
 
 .formField {
-  @at-root #{&}--userId {
-    width: 190px;
-  }
-
-  @at-root #{&}__userId {
+  &__userId {
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    > .formField {
+      width: 190px;
+    }
   }
 
-  @at-root #{&}__avatar {
-    @at-root #{&} {
+  &__avatar {
+    & {
       border-radius: 3px;
       height: 55px;
     }
 
-    @at-root #{&}--loading {
+    &--loading {
       border: 2px solid $color-border;
       border-radius: 3px;
       height: 51px;
     }
   }
 
-  @at-root #{&}__description {
+  &__description {
     display: flex;
     font-family: 'Quicksand', sans-serif;
     font-size: 14px;
@@ -50,7 +50,7 @@
     margin-left: 4px;
   }
 
-  @at-root #{&}__input {
+  &__input {
     border: 2px solid $color-border;
     border-radius: 3px;
     font-family: 'Quicksand', sans-serif;
@@ -60,23 +60,23 @@
     padding: 5px 0 5px 6px;
     width: calc(100% - 8px);
 
-    @at-root #{&}:focus {
+    &:focus {
       border: 2px solid $color-border-focus;
       outline: none;
     }
   }
 
-  @at-root #{&}__status {
+  &__status {
     align-items: center;
     display: flex;
     font-size: 12px;
     font-weight: bold;
 
-    @at-root #{&}--valid {
+    &--valid {
       color: $color-icon-valid;
     }
 
-    @at-root #{&}--invalid {
+    &--invalid {
       color: $color-icon-invalid;
     }
 
