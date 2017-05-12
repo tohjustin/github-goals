@@ -141,12 +141,12 @@ const FORMVIEW_SHOW_SPINNER = () => {
   document.getElementById('form-avatar-spinner').style.display = 'block';
 };
 const FORMVIEW_SHOW_VALID_ICON = () => {
-  document.getElementById('form-id-valid').style.display = 'block';
+  document.getElementById('form-id-valid').style.display = 'flex';
   document.getElementById('form-id-invalid').style.display = 'none';
 };
 const FORMVIEW_SHOW_INVALID_ICON = () => {
   document.getElementById('form-id-valid').style.display = 'none';
-  document.getElementById('form-id-invalid').style.display = 'block';
+  document.getElementById('form-id-invalid').style.display = 'flex';
 };
 const FORMVIEW_HIDE_ICONS = () => {
   document.getElementById('form-id-valid').style.display = 'none';
