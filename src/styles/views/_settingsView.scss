@@ -43,8 +43,6 @@
 
   &__description {
     display: flex;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 14px;
     font-weight: bold;
     margin-bottom: 2px;
     margin-left: 4px;
@@ -53,9 +51,6 @@
   &__input {
     border: 2px solid $color-border;
     border-radius: 3px;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 14px;
-    font-weight: normal;
     margin-top: 2px;
     padding: 5px 0 5px 6px;
     width: calc(100% - 8px);
