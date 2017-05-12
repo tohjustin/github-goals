@@ -44,7 +44,8 @@ $userPanel-height: 50px;
     cursor: pointer;
 
     @at-root #{&}:hover {
-      filter: brightness(-50%);
+      // filter for $color-primary (navy-blue)
+      filter: contrast(0) sepia(100%) hue-rotate(170deg) brightness(0.7) saturate(5);
     }
   }
 
