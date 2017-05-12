@@ -71,22 +71,22 @@ const PREPOPULATE_INPUT_FIELDS = () => {
   const data = store.load();
   if (data) {
     const { targetContributionCount, githubId } = data;
-    document.getElementById('formView-id').value = githubId;
-    document.getElementById('formView-count').value = targetContributionCount;
+    document.getElementById('form-idInput').value = githubId;
+    document.getElementById('form-contributionInput').value = targetContributionCount;
   }
 };
 
 const CLEAR_INPUT_FIELDS = () => {
-  document.getElementById('formView-id').value = '';
-  document.getElementById('formView-count').value = '';
+  document.getElementById('form-idInput').value = '';
+  document.getElementById('form-contributionInput').value = '';
 };
 
 /* --------------------------------------
  DATA HANDLING FUNCTIONS
 -------------------------------------- */
 const SAVE_DATA = () => {
-  const githubId = document.getElementById('formView-id').value;
-  const targetContributionCount = parseInt(document.getElementById('formView-count').value, 10);
+  const githubId = document.getElementById('form-idInput').value;
+  const targetContributionCount = parseInt(document.getElementById('form-contributionInput').value, 10);
   store.save({ githubId, targetContributionCount });
 };
 
@@ -99,7 +99,7 @@ const SYNC_BACKGROUND_DATA = () => {
 -------------------------------------- */
 const SHOW_MAIN_VIEW = () => {
   document.getElementById('mainView').style.display = 'block';
-  document.getElementById('formView').style.display = 'none';
+  document.getElementById('settingsView').style.display = 'none';
 
   // Check if we have user's has a config stored locally
   const data = store.load();
@@ -114,10 +114,10 @@ const SHOW_MAIN_VIEW = () => {
 
 const SHOW_FORM_VIEW = () => {
   document.getElementById('mainView').style.display = 'none';
-  document.getElementById('formView').style.display = 'block';
+  document.getElementById('settingsView').style.display = 'flex';
 
   /* Focus on first input field in the form */
-  document.getElementById('formView-id').focus();
+  document.getElementById('form-idInput').focus();
 };
 
 const UPDATE_MAIN_VIEW = () => {
@@ -133,37 +133,37 @@ const UPDATE_MAIN_VIEW = () => {
  GITHUB ID CHECKING FUNCTIONS
 -------------------------------------- */
 const FORMVIEW_SHOW_AVATAR = () => {
-  document.getElementById('formView-avatar').style.display = 'block';
-  document.getElementById('formView-avatar-spinner').style.display = 'none';
+  document.getElementById('form-avatar').style.display = 'block';
+  document.getElementById('form-avatar-spinner').style.display = 'none';
 };
 const FORMVIEW_SHOW_SPINNER = () => {
-  document.getElementById('formView-avatar').style.display = 'none';
-  document.getElementById('formView-avatar-spinner').style.display = 'block';
+  document.getElementById('form-avatar').style.display = 'none';
+  document.getElementById('form-avatar-spinner').style.display = 'block';
 };
 const FORMVIEW_SHOW_VALID_ICON = () => {
-  document.getElementById('avatar-valid').style.display = 'block';
-  document.getElementById('avatar-invalid').style.display = 'none';
+  document.getElementById('form-id-valid').style.display = 'block';
+  document.getElementById('form-id-invalid').style.display = 'none';
 };
 const FORMVIEW_SHOW_INVALID_ICON = () => {
-  document.getElementById('avatar-valid').style.display = 'none';
-  document.getElementById('avatar-invalid').style.display = 'block';
+  document.getElementById('form-id-valid').style.display = 'none';
+  document.getElementById('form-id-invalid').style.display = 'block';
 };
 const FORMVIEW_HIDE_ICONS = () => {
-  document.getElementById('avatar-valid').style.display = 'none';
-  document.getElementById('avatar-invalid').style.display = 'none';
+  document.getElementById('form-id-valid').style.display = 'none';
+  document.getElementById('form-id-invalid').style.display = 'none';
 };
 const FORMVIEW_ENABLE_SUBMIT_BTN = () => {
-  document.getElementById('formView-submit').disabled = false;
+  document.getElementById('form-submitBtn').disabled = false;
 };
 const FORMVIEW_DISABLE_SUBMIT_BTN = () => {
-  document.getElementById('formView-submit').disabled = true;
+  document.getElementById('form-submitBtn').disabled = true;
 };
 
 const IS_GITHUBID_VALID = () => {
   FORMVIEW_HIDE_ICONS();
   FORMVIEW_SHOW_SPINNER();
   FORMVIEW_DISABLE_SUBMIT_BTN();
-  const inputGithubId = document.getElementById('formView-id').value;
+  const inputGithubId = document.getElementById('form-idInput').value;
   const config = {
     baseURL: 'https://www.github.com/users',
     validateStatus: status => (status === 200)
@@ -172,14 +172,14 @@ const IS_GITHUBID_VALID = () => {
   axios.get(`${inputGithubId}/contributions`, config)
     .then(() => {
       /* user exists! */
-      document.getElementById('formView-avatar').src = `https://avatars0.githubusercontent.com/${inputGithubId}`;
+      document.getElementById('form-avatar').src = `https://avatars0.githubusercontent.com/${inputGithubId}`;
       FORMVIEW_SHOW_AVATAR();
       FORMVIEW_SHOW_VALID_ICON();
       FORMVIEW_ENABLE_SUBMIT_BTN();
     })
     .catch(() => {
       /* user doesn't exist! */
-      document.getElementById('formView-avatar').src = '../images/avatar.png';
+      document.getElementById('form-avatar').src = '../images/avatar.png';
       FORMVIEW_SHOW_AVATAR();
       FORMVIEW_SHOW_INVALID_ICON();
       FORMVIEW_DISABLE_SUBMIT_BTN();
@@ -201,23 +201,23 @@ window.onload = () => {
   });
 
   document.getElementById('userPanel-configureBtn').addEventListener('click', () => {
-    document.getElementById('formView-avatar').src = '../images/avatar.png';
+    document.getElementById('form-avatar').src = '../images/avatar.png';
     FORMVIEW_SHOW_AVATAR();
     FORMVIEW_HIDE_ICONS();
     FORMVIEW_DISABLE_SUBMIT_BTN();
     SHOW_FORM_VIEW();
   });
 
-  document.getElementById('formView-id').addEventListener('input', () => {
+  document.getElementById('form-idInput').addEventListener('input', () => {
     DEBOUNCED_GITHUBID_IS_VALID();
   });
 
-  document.getElementById('formView-cancel').addEventListener('click', () => {
+  document.getElementById('form-cancelBtn').addEventListener('click', () => {
     SHOW_MAIN_VIEW();
     CLEAR_INPUT_FIELDS();
   });
 
-  document.getElementById('formView-submit').addEventListener('click', () => {
+  document.getElementById('form-submitBtn').addEventListener('click', () => {
     SAVE_DATA();
     UPDATE_MAIN_VIEW();
     SHOW_MAIN_VIEW();

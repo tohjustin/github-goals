@@ -11,30 +11,30 @@
         <div class="formField formField--userId">
           <div class="formField__description">
             <span>Github ID</span>
-            <span class="formField__status formField__status--invalid">
+            <span id="form-id-invalid" class="formField__status formField__status--invalid">
               <img src="../images/invalid.png">
               <span>ID doesn't exist</span>
             </span>
-            <span class="formField__status formField__status--valid">
+            <span id="form-id-valid" class="formField__status formField__status--valid">
               <img src="../images/valid.png">
             </span>
           </div>
-          <input class="formField__input" type="text">
+          <input id="form-idInput" class="formField__input" type="text">
         </div>
         <div class="formField__avatar">
-          <img class="formField__avatar" src="../images/avatar.png">
-          <img class="formField__avatar--loading" src="../images/avatar-spinner.gif">
+          <img id="form-avatar" class="formField__avatar" src="../images/avatar.png">
+          <img id="form-avatar-spinner" class="formField__avatar--loading" src="../images/avatar-spinner.gif">
         </div>
       </div>
       <div class="formField">
         <div class="formField__description">
           <span>Target amount of daily contributions</span>
         </div>
-        <input class="formField__input" type="text">
+        <input id="form-contributionInput" class="formField__input" type="text">
       </div>
       <div class="btnRow">
-        <button class="btn btn--secondary">Cancel</button>
-        <button class="btn btn--primary">Save Settings</button>
+        <button id="form-cancelBtn" class="btn btn--secondary">Cancel</button>
+        <button id="form-submitBtn" class="btn btn--primary">Save Settings</button>
       </div>
     </div>
     <div id="mainView" class="mainView">
