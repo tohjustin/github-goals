@@ -1,12 +1,12 @@
 .userPanel {
-  display: flex;
-  justify-content: flex-start;
   align-items: center;
+  display: flex;
   height: $userPanel-height;
+  justify-content: flex-start;
 
   &__avatar {
-    height: 100%;
     border-radius: 3px;
+    height: 100%;
   }
 
   &__info {
@@ -15,17 +15,16 @@
 
     a {
       color: $color-primary;
-      text-decoration: none;
-      outline: none;
       font-size: 1.5rem;
+      outline: none;
+      text-decoration: none;
 
       &:link,
       &:visited,
       &:focus {
         color: $color-primary;
-        text-decoration: none;
-        outline: none;
-        font-size: 1.5rem;
+        outline: inherit;
+        text-decoration: inherit;
       }
 
       &:hover,
@@ -36,10 +35,10 @@
   }
 
   &__editBtn {
-    height: 1rem;
-    margin-left: 0.2rem;
-    margin-bottom: -0.1rem;
     cursor: pointer;
+    height: 1rem;
+    margin-bottom: -0.1rem;
+    margin-left: 0.2rem;
 
     &:hover {
       // filter for $color-primary ()
@@ -54,8 +53,8 @@
 
   &__configureBtn {
     height: 100%;
-    width: 14rem;
-    margin-left: auto; // flush btn to the right
     line-height: $userPanel-height;
+    margin-left: auto; // flush btn to the right
+    width: 14rem;
   }
 }

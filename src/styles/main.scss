@@ -11,16 +11,16 @@ body,
 input,
 button {
   font-family: 'Quicksand', sans-serif;
+  font-size: 15px;
   -webkit-font-smoothing: antialiased;
   font-weight: normal;
-  font-size: 15px;
   margin: 0;
 }
 
 .body {
   color: $color-font-black;
-  width: 22.5rem;
   height: 13.8rem;
+  width: 22.5rem;
 
   > div {
     height: 100%;
