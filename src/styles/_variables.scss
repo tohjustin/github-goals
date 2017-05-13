@@ -26,6 +26,6 @@ $color-progessbar-background: $color-secondary;
 // Element sizes
 $avatar-height: 4rem;
 $userPanel-height: 4rem;
-$border-radius: 0.21rem;
 $border-thickness: 0.17rem;
+$border-radius: $border-thickness * 2;
 $progressBar-border-radius: 0.6rem;
