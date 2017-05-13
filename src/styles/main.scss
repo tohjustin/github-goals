@@ -19,11 +19,11 @@ button {
 
 .body {
   color: $color-font-black;
-  height: 13.8rem;
-  width: 22.5rem;
+  height: $view-height;
+  width: $view-width;
 
   > div {
     height: 100%;
-    margin: 1.75rem;
+    margin: $view-margin;
   }
 }
