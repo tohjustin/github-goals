@@ -38,7 +38,8 @@
 
     > .formField {
       height: $avatar-height;
-      width: calc(100% - #{$avatar-height} - 1rem);
+      margin-right: 1rem;
+      width: 100%;
     }
   }
 

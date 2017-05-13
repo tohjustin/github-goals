@@ -53,8 +53,7 @@
 
   &__configureBtn {
     height: 100%;
-    line-height: $userPanel-height;
-    margin-left: auto; // flush btn to the right
-    width: 14rem;
+    margin-left: 1rem;
+    width: 100%;
   }
 }
