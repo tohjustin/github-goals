@@ -43,11 +43,9 @@
   }
 
   &__avatar {
-    img {
-      border-radius: 3px;
-      height: $avatar-height;
-      width: auto;
-    }
+    border-radius: 3px;
+    height: $avatar-height;
+    width: auto;
 
     &--loading {
       border: 2px solid $color-border;
