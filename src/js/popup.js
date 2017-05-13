@@ -98,7 +98,7 @@ const SYNC_BACKGROUND_DATA = () => {
  VIEW TOGGLING FUNCTIONS
 -------------------------------------- */
 const SHOW_MAIN_VIEW = () => {
-  document.getElementById('mainView').style.display = 'block';
+  document.getElementById('mainView').style.display = 'flex';
   document.getElementById('settingsView').style.display = 'none';
 
   // Check if we have user's has a config stored locally

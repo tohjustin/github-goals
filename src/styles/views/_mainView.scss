@@ -5,20 +5,19 @@
 .mainView {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  margin: 20px;
+  justify-content: space-between;
 }
 
 .contribution {
-  margin: 15px 0;
+  margin: 1rem 0;
 
   > span {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-bottom: 0.3rem;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
   }
 
   &__title {
@@ -31,11 +30,11 @@
     width: 47.5%;
   }
 
-  :first-child {
+  &:first-child {
     margin-top: 0;
   }
 
-  :last-child {
+  &:last-child {
     margin-bottom: 0;
   }
 }
