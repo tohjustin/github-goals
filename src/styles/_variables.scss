@@ -10,7 +10,7 @@ $color-font-black: #333;
 $color-font-white: #fff;
 
 // Border
-$color-border: #d8d8d8;
+$color-border: $color-secondary;
 $color-border-focus: $color-primary;
 
 // Icons
@@ -21,8 +21,11 @@ $color-icon-invalid: #f40f2b;
 $color-progessbar-100: #7ed321;
 $color-progessbar-50: #f5a623;
 $color-progessbar-0: #f40f2b;
-$color-progessbar-background: #d8d8d8;
+$color-progessbar-background: $color-secondary;
 
-// Sizes
+// Element sizes
 $avatar-height: 4rem;
 $userPanel-height: 4rem;
+$border-radius: 0.21rem;
+$border-thickness: 0.17rem;
+$progressBar-border-radius: 0.6rem;
