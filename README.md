@@ -10,6 +10,8 @@
 </p>
 
 ## Extension Preview
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftohjustin%2Fgithub-goals.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftohjustin%2Fgithub-goals?ref=badge_shield)
+
 <p align="center">
   <img src="./readme/preview.gif">
 </p>
@@ -40,3 +42,6 @@ yarn run build
 ## License
 
 MIT © [Justin Toh](https://github.com/tohjustin)
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftohjustin%2Fgithub-goals.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftohjustin%2Fgithub-goals?ref=badge_large)
